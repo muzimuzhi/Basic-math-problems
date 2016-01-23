@@ -1,0 +1,295 @@
+\section{偏微分方程}
+
+\subsection{边界条件}
+
+\subsubsection{细杆的热传导方程}
+\begin{description}
+	\item[第I类边界条件]杆在端点处保持与介质一样的温度.
+	\begin{align*}
+		\eval[1]{u}_{x = 0} & \equiv u(0,t) = f_1(t) \\
+		\eval[1]{u}_{x = \ell} & \equiv u(\ell,t) = f_2(t).
+	\end{align*}
+	
+	\item[第II类边界条件]杆在 $x = 4$ 处“绝热”, 即该端点的热流强度为零.
+	\[
+		\eval[3]{\dpd ux}_{x = \ell} = 0.
+	\]
+	一般地, 单位时间内流经端点界面的热量可表示为
+	\[
+		\eval[3]{\dpd un}_{x = \ell} = g(t).
+	\]
+	
+	\item[第II类边界条件]杆的一端处于“自由冷却”状态.
+	\[
+		\eval[3]{\del[3]{\dpd un + \mu u}}_{x = \ell} = f(t).
+	\]
+\end{description}
+
+\subsubsection{弦的振动方程}
+\begin{itemize}
+	\item 一端固定：
+	\[
+		\eval[1]{u}_{x = \ell} = 0.
+	\]
+	
+	\item 一端自由：
+	\[
+		\eval[3]{\dpd ux}_{x = \ell} = 0.
+	\]
+	
+	\item 一端与弹性支座相连：
+	\[
+		\eval[3]{\del[3]{\dpd un + ku}}_{x = \ell} = 0.
+	\]
+\end{itemize}
+
+\subsection{初始条件}
+
+\subsubsection{波动方程}
+\begin{description}
+	\item[初始位移]
+	\[
+		\eval[1]{u}_{t = 0} = \varphi(x),
+	\]
+	
+	\item[初始速度]
+	\[
+		\eval[1]{u_t}_{t = 0} = \psi(x).
+	\]
+\end{description}
+
+\subsubsection{热传导方程}
+初始时刻区域内的温度分布：
+\begin{description}
+	\item[一维情况]
+	\[
+		\eval[1]{u}_{t = 0} = \varphi(x).
+	\]
+	
+	\item[三维情况]
+	\[
+		\eval[1]{u}_{t = 0} = \varphi(x,y,z).
+	\]
+\end{description}
+
+\subsection{本征值问题}
+若函数 $X(x)$ 满足 $X''(x) + \lambda X(x) = 0$ $(0 < x < \ell)$和以下边界条件之一, 
+\begin{enumerate}[i)]
+	\item $X(0) = 0$, $X(\ell) = 0$, 则
+	\[
+		\lambda_k = \del[3]{\frac{k \pi}{\ell}}^2, \quad
+		X_k(x) = c_k \sin \frac{k \pi}{\ell}x. \qquad (k = 1,2,\dotsc)
+	\]
+
+	\item $X'(0) = 0$, $X(\ell) = 0$, 则
+	\[
+		\lambda_k = \del[3]{\frac{(2k - 1)k \pi}{2 \ell}}^2, \quad
+		X_k(x) = c_k \sin \frac{(2k - 1)k \pi}{2 \ell}x. \qquad (k = 1,2,\dotsc)
+	\]
+	
+	\item $X(0) = 0$, $X'(\ell) = 0$, 则
+	\[
+		\lambda_k = \del[3]{\frac{(2k - 1) \pi}{2 \ell}}^2, \quad
+		X_k(x) = c_k \sin \frac{(2k - 1) \pi}{2 \ell}x. \qquad (k = 1,2,\dotsc)
+	\]
+	
+	\item $X'(0) = 0$, $X'(\ell) = 0$, 则
+	\[
+		\lambda_k = \del[3]{\frac{k \pi}{\ell}}^2, \quad
+		X_k(x) = c_k \cos \frac{k \pi}{\ell}x. \qquad (k = 0,1,2,\dotsc)
+	\]
+	
+	\item $X(0) = 0$, $X'(\ell) + hX(\ell)= 0$ $(h>0 \text{ 为常数})$, 则
+	\[
+		\lambda_k = \del[3]{\frac{r_k}{\ell}}^2, \quad
+		X_k(x) = c_k \sin \frac{r_k}{\ell}x, \qquad (k = 1,2,\dotsc)
+	\]
+	其中 $r_k$ 是 $\tan r = -r / lh$ 的第 $k$ 个正根.
+\end{enumerate}
+
+\subsection{补充习题}
+\begin{exercise}[141223补充练习题]
+求解下列方程：
+\[\begin{cases}
+	u_{rr} + \dfrac 1r u_r + \dfrac{1}{r^2} u_{\theta \theta} = 1 \\[5pt]
+	\eval[1]{u}_{r = 1} = 1,\quad \eval[1]{u}_{r = 2} = \cos^2 \theta \\[5pt]
+	u(r,\theta) = u(r,\theta + 2\pi)
+\end{cases}\]
+\end{exercise}
+
+\begin{solution}
+\textbf{方法一：}\emph{用叠加原理拆成两组方程, 一组的方程非齐次而两对边值条件都齐次, 一组的方程齐次而仅有一对边值条件齐次.}
+
+由叠加原理, $u(r,\theta) = u_{\text{I}}(r,\theta) + u_{\text{II}}(r,\theta)$, 其中 $u_{\textrm{I}}(r,\theta)$ 与 $u_{\textrm{II}}(r,\theta)$ 分别满足
+\[
+	\text{I) }\left\{\begin{aligned}
+		& u_{rr} + \dfrac 1r u_r + \dfrac{1}{r^2} u_{\theta \theta} = 0 \\[5pt]
+		& \eval[1]{u}_{r = 1} = 1,\quad \eval[1]{u}_{r = 2} = \cos^2 \theta \\[5pt]
+		& u(r,\theta) = u(r,\theta + 2\pi)
+	\end{aligned}\right.
+	\qquad
+	\text{II) }\left\{\begin{aligned}
+		& u_{rr} + \dfrac 1r u_r + \dfrac{1}{r^2} u_{\theta \theta} = 1 \\[5pt]
+		& \eval[1]{u}_{r = 1} = 0,\quad \eval[1]{u}_{r = 2} = 0 \\[5pt]
+		& u(r,\theta) = u(r,\theta + 2\pi)
+	\end{aligned}\right.
+\]
+
+\textbf{对I)}, 记 $u_{\textrm{I}}(r,\theta) = R(r)H(\theta)$, 则有
+\[
+	-\frac{r^2 R'' + r R'}{R} = \frac{H''}{H} \overset{\triangle}{=} -\lambda.
+\]
+于是有
+\[
+	\text{$H(\theta)$ 满足\ }\left\{\begin{aligned}
+		& H''(\theta) + \lambda H(\theta) = 0 \\
+		& H(\theta) = H(\theta + 2\pi),
+	\end{aligned}\right.
+	\qquad
+	\text{$R(r)$ 满足\ } r^2 R''(r) + r R' - \lambda r = 0.
+\]
+对 $H(\theta)$, 可解得
+\[
+	\lambda_k = k^2,\qquad
+	H_k(\theta) = a_k \cos k\theta + b_k \sin k\theta. \qquad
+	(k = 0,1,2,\dotsc)
+\]
+此时, $R(r)$ 满足 $r^2 R''(r) + r R' - k^2 r = 0$, 为欧拉方程形式, 解得
+\begin{align*}
+	R_0(r) &= c_0 + d_0 \ln r, \\
+	R_k(r) &= c_k r^k + d_k r^{-k}. \quad (k = 1,2,\dotsc)
+\end{align*}
+所以
+\begin{equation}\label{eq:uii}
+	u_{\textrm{I}}(r,\theta) = A_0 + B_0 \ln r
+	+ \sum_{k = 1}^{+\infty} \sbr[2]{\del[1]{A_k r^k + B_k r^{-k}}\cos k\theta + \del[1]{C_k r^k + D_k r^{-k}}\sin k\theta}.
+\end{equation}
+代入边值条件, 得
+\begin{align*}
+	A_0 + \sum_{k = 1}^{+\infty} \sbr[1]{\del[0]{A_k + B_k}\cos k\theta + \del[0]{C_k + D_k}\sin k\theta} &= 1, \\
+	A_0 + B_0 \ln 2 + \sum_{k = 1}^{+\infty} \sbr[2]{\del[1]{A_k \cdot 2^k + B_k \cdot 2^{-k}}\cos k\theta + \del[1]{C_k \cdot 2^k + D_k \cdot 2^{-k}}\sin k\theta} &= \frac{1 + \cos 2\theta}{2}.	
+\end{align*}
+将上面两个等式的右侧按本征函数展开并比较系数, 易得
+\[
+	\left\{\begin{aligned}
+	A_0 &= 1 \\
+	A_0 + B_0 \ln 2 &= \frac 12 \\
+	A_k + B_k &= 0 \quad (k=1,2,\dotsc) \\
+	4 A_2 + \frac 14 B_2 &= \frac 12\\
+	A_k \cdot 2^k + B_k \cdot 2^{-k} &= 0 \quad (k \in \mathbb{Z}_+ \text{ 且\ } k \neq 2) \\
+	C_k + D_k &= 0 \quad (k=1,2,\dotsc) \\
+	C_k \cdot 2^k + D_k \cdot 2^{-k} &= 0 \quad (k=1,2,\dotsc)
+	\end{aligned}\right.
+	\text{ 解得\ }
+	\left\{\begin{aligned}
+	A_0 &= \phantom{-} 1 \\
+	B_0 &=           - \frac{1}{2 \ln 2} \\
+	A_2 &= \phantom{-} \frac{2}{15} \\
+	B_2 &=           - \frac{2}{15} \\
+	A_k &= B_k = 0 \quad (k \in \mathbb{Z}_+ \text{ 且\ } k \neq 2) \\
+	C_k &= D_k = 0 \quad (k=1,2,\dotsc) \\
+	\end{aligned}\right.
+\]
+代入 \eqref{eq:uii}, 得
+\begin{equation}
+	\boxed{u_{\textrm{I}}(r,\theta) = 1 - \frac{\ln r}{2 \ln 2} + \frac{2}{15} \del[1]{r^2 - r^{-2}} \cdot \cos 2\theta.}
+\end{equation}
+
+
+\textbf{对II)}, 其方程对应的齐次形式, 有本征函数
+\[
+	H_k(\theta) = a_k \cos k\theta + b_k \sin k\theta. \quad (k = 0,1,2,\dotsc)
+\]
+设
+\begin{equation}\label{eq:ui}
+	u_{\textrm{II}}(r,\theta) = 
+	\sum_{k = 0}^{+\infty} \del[1]{C_k(r) \cos k\theta + D_k(r) \sin k\theta},
+\end{equation}
+代入I)中的方程与 $r$ 的边值条件, 即得
+\begin{gather*}
+	\sum_{k = 0}^{+\infty} \set[4]{\sbr[3]{C''_k(r) + \frac 1r C'_k(r) - \frac{k^2}{r^2} C_k(r)} \cos k\theta + \sbr[3]{D''_k(r) + \frac 1r D'_k(r) - \frac{k^2}{r^2} D_k(r)} \sin k\theta} = 1, \\
+	\sum_{k = 0}^{+\infty} \sbr[2]{C_k(1) \cos k\theta + D_k(1) \sin k\theta} = 0, \\
+	\sum_{k = 0}^{+\infty} \sbr[2]{C_k(2) \cos k\theta + D_k(2) \sin k\theta} = 0.
+\end{gather*}
+将上面三个等式的右侧按本征函数展开并比较系数, 易得
+\begin{align*}
+	C''_0(r) + \frac 1r C'_0(r) &= 1, & C_k(1) &=0 & C_k(2) &=0 \\[5pt]
+	C''_k(r) + \frac 1r C'_k(r) - \frac{k^2}{r^2} C_k(r) &= 0, & C_k(1) &=0 & C_k(2) &=0 \qquad (k = 1,2,\dotsc)\\[5pt]
+	D''_k(r) + \frac 1r D'_k(r) - \frac{k^2}{r^2} D_k(r) &= 0. & D_k(1) &=0 & D_k(2) &=0 \qquad (k = 0,1,2,\dotsc)
+\end{align*}
+它们都具有欧拉方程的形式. 解方程, 并代入初值条件, 分别得到
+\begin{align*}
+	C_0(r) &= \frac 14 r^2 - \frac{3\ln r}{4 \ln 2} - \frac 14, \\
+	C_k(r) &= 0 \qquad (k = 1,2,\dotsc), \\
+	D_k(r) &= 0 \qquad (k = 0,1,2,\dotsc).
+\end{align*}
+将这些解代入 \eqref{eq:ui}, 得到
+\[
+	\boxed{u_{\textrm{II}}(r,\theta) = \frac 14 r^2 - \frac{3\ln r}{4 \ln 2} - \frac 14.}
+\]
+
+最后, 由叠加原理, 原方程的解为
+\[
+	\boxed{u(r,\theta) = \frac{r^2 + 3}{4} -\frac{5\ln r}{4 \ln 2} + \frac{2 \del[1]{r^2 - r^{-2}}}{15}\cos 2\theta.}
+\]
+
+\textbf{方法二：}\emph{找一个满足两对边值条件的特殊函数, 将方程化为满足齐次边值条件的形式.}
+
+取一个满足两对边值条件的函数 $w(r,\theta) = (2 - r) + (r-1)\cos^2 \theta$, 即
+\begin{equation}\label{eq:w}
+	w(r,\theta) = -\frac{r-3}{2} + \frac{r-1}{2}\cos 2\theta.
+\end{equation}
+令
+\begin{equation}\label{eq:uvw}
+	v(r,\theta) = u(r,\theta) - w(r,\theta),
+\end{equation}
+则 $v(r,\theta)$ 满足
+\begin{equation}\label{eq:v_r_theta}
+	\begin{cases}
+		v_{rr} + \dfrac 1r v_r + \dfrac{1}{r^2} v_{\theta \theta} = \dfrac{3r-4}{2r^2} \cos 2\theta + \dfrac{1}{2r} + 1 \\[5pt]
+		\eval[1]{v}_{r = 1} = 0,\quad \eval[1]{v}_{r = 2} = 0 \\[5pt]
+		v(r,\theta) = v(r,\theta + 2\pi).
+	\end{cases}
+\end{equation}
+
+易得 \eqref{eq:v_r_theta} 中的方程有本征函数
+\[
+	H_k(\theta) = a_k \cos k\theta + b_k \sin k\theta. \quad (k = 0,1,2,\dotsc)
+\]
+设
+\begin{equation}\label{eq:vRH}
+	v(r,\theta) = 
+	\sum_{k = 0}^{+\infty} \del[1]{C_k(r) \cos k\theta + D_k(r) \sin k\theta},
+\end{equation}
+代入 \eqref{eq:v_r_theta} 中的方程与 $r$ 的边值条件, 即得
+\begin{gather*}
+	\quad\sum_{k = 0}^{+\infty} \set[4]{\sbr[3]{C''_k(r) + \frac 1r C'_k(r) - \frac{k^2}{r^2} C_k(r)} \cos k\theta + \sbr[3]{D''_k(r) + \frac 1r D'_k(r) - \frac{k^2}{r^2} D_k(r)} \sin k\theta} \\
+	= \dfrac{3r-4}{2r^2} \cos 2\theta + \dfrac{1}{2r} + 1, \\
+	\sum_{k = 0}^{+\infty} \sbr[2]{C_k(1) \cos k\theta + D_k(1) \sin k\theta} = 0, \\
+	\sum_{k = 0}^{+\infty} \sbr[2]{C_k(2) \cos k\theta + D_k(2) \sin k\theta} = 0.
+\end{gather*}
+将上面三个等式的右侧按本征函数展开并比较系数, 可得
+\begin{align*}
+	C''_0(r) + \frac 1r C'_0(r) &= \frac{1}{2r} + 1, & C_k(1) &=0 & C_k(2) &=0 \\[5pt]
+	C''_2(r) + \frac 1r C'_2(r) - \frac{4}{r^2} C_2(r) &= \frac{3r-4}{2r^2}, & C_2(1) &=0 & C_2(2) &=0\\[5pt]
+	C''_k(r) + \frac 1r C'_k(r) - \frac{k^2}{r^2} C_k(r) &= 0, & C_k(1) &=0 & C_k(2) &=0 \qquad (k \in \mathbb{Z} \text{ 且\ } k \neq 2)\\[5pt]
+	D''_k(r) + \frac 1r D'_k(r) - \frac{k^2}{r^2} D_k(r) &= 0. & D_k(1) &=0 & D_k(2) &=0 \qquad (k = 0,1,2,\dotsc)
+\end{align*}
+它们都具有欧拉方程的形式. 解方程, 并代入初值条件, 分别得到
+\begin{align*}
+	C_0(r) &= \frac{r^2+2r-3}{4} - \frac{5\ln r}{4\ln 2}, \\
+	C_2(r) &= -\frac{r-1}{2} + \frac{2}{15}\del[1]{r^2-r^{-2}}, \\
+	C_k(r) &= 0, \qquad (k \in \mathbb{Z} \text{ 且\ } k \neq 2) \\
+	D_k(r) &= 0. \qquad (k = 0,1,2,\dotsc) 
+\end{align*}
+将这些解代入 \eqref{eq:vRH}, 得到
+\begin{eqnarray}\label{eq:v}
+	v(r,\theta) = \frac{r^2+2r-3}{4} - \frac{5\ln r}{4\ln 2} + \frac{2 \del[1]{r^2 - r^{-2}}}{15}\cos 2\theta.
+\end{eqnarray}
+
+最后, 将 \eqref{eq:w} 和 \eqref{eq:v} 代入 \eqref{eq:uvw}, 得原方程的解为
+\[
+	\boxed{u(r,\theta) = \frac{r^2 + 3}{4} -\frac{5\ln r}{4 \ln 2} + \frac{2 \del[1]{r^2 - r^{-2}}}{15}\cos 2\theta.}
+\]
+
+\end{solution}

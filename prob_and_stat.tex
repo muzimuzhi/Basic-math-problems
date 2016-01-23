@@ -1,0 +1,55 @@
+\section{概率论与数理统计}
+
+\begin{exercise}
+    若 $X \sim N(\mu, \sigma^2)$, 根据定义，其概率密度函数
+    \[
+        f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\del[3]{-\frac{(x - \mu)^2}{\sigma^2}}
+    \]
+    满足 $\int_{-\infty}^{+\infty} f(x) = 1$. 特别地，当 $\mu = 0$, $\sigma = 1$ 时（等价地，我们可以取 $Y = (X - \mu) / \sigma$），我们有
+    \[
+        \int_{-\infty}^{+\infty} \mathe^{-x^2} \dx = \sqrt{\pi}.
+    \]
+    这个结论可以用如下的过程来说明
+    \begin{align*}
+        \int_{-\infty}^{+\infty} \mathe^{-x^2} \dx
+        &= \del[3]{\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \mathe^{-(x^2+y^2)} \dx\dif y}^{1/2} \\
+        &= \del[3]{\int_0^{2\pi} \int_0^{+\infty} r \mathe^{-r^2} \dif r\dif\theta}^{1/2} \\
+        &= \del[3]{-2\pi \cdot \eval[2]{\frac{\mathe^{-r^2}}{2}}_0^{+\infty}}^{1/2} \\
+        &= \sqrt{\pi}.
+    \end{align*}
+\end{exercise}
+
+\begin{exercise}[12--13 春夏]
+    设 $(X, Y)$ 服从二元正态分布，$X \sim N(5, 3^2)$, $Y　\sim N(0, 2^2)$, $\rho_{XY}$ 是 $X$ 与 $Y$ 的相关系数.
+    \begin{enumerate}
+        \item 若 $\rho_{XY} = 0$, 求 $P\set{X > 2Y}$, 并写出 $\displaystyle \del[3]{\frac{2X - 3Y - 10}{2X + 3Y - 10}}^2$ 满足的分布（含参数）;
+        
+        \item 若 $X + Y$ 与 $X - 3Y$ 相互独立，求 $\rho_{XY}$;
+        
+        \item 若对 $Y$ 进行 $n$ 次独立重复观测，结果是 $Y_1, Y_2, \ldots, Y_n$，则当 $n \to \infty$ 时，求 $\displaystyle \frac 1n \sum_{i = 1}^n e^{Y_i}$ 依概率收敛到的极限值;
+        
+        \item 若对 $Y$ 进行 $n$ 次独立重复观测，结果是 $Y_1, Y_2, \ldots, Y_n$，则当 $n = 100$ 时，求 $Y$ 的观测结果中大于 $2$ 出现的次数不超过 $22$ 次的概率近似值.
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item 记 $Z = \exp Y$ 为关于 $Y$ 的统计量. 则
+        \begin{align*}
+            E(Z) 
+            &= \int_{-\infty}^{+\infty} z(y) f(y) \dif y \\
+            &= \int_{-\infty}^{+\infty} \frac{e^y}{2\sqrt{2\pi}} \exp\del[3]{-\frac{y^2}{8}} \dif y \\
+            &= \int_{-\infty}^{+\infty} \frac{1}{2\sqrt{2\pi}} \exp\del[3]{-\frac{(y - 4)^2}{8} + 2} \dif y \\
+            &= e^2 \int_{-\infty}^{+\infty} \frac{1}{2\sqrt{2\pi}} \exp\del[3]{-\frac{(y - 4)^2}{8}} \dif y \\
+            &= e^2,
+        \end{align*}
+        其中 $f(y)$ 是 $Y$ 的概率密度函数. 所以
+        \[
+            \lim_{n \to \infty} \frac 1n \sum_{i = 1}^n e^{Y_i}
+            \stackrel{P}{\to} E(e^Y)
+            = e^2.
+        \]
+        一般地，若 $Y \sim N(\mu, \sigma^2)$, $Z = \exp Y$, 则称 $Z$ 满足\emph{对数正态分布}，$E(Z) = \exp(\mu + \sigma^2 / 2)$.
+    \end{enumerate}
+\end{solution}

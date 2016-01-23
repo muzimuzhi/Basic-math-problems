@@ -1,0 +1,1023 @@
+\section{微积分}
+
+\subsection{函数基础}
+\begin{exercise}
+    已知 $y=\sqrt[3]{x + \sqrt{1 + x^2}} + \sqrt[3]{x - \sqrt{1 + x^2}}$, 求其反函数.
+\end{exercise}
+
+\begin{solution}
+    记 $a = \sqrt[3]{x + \sqrt{1 + x^2}}$, $b = \sqrt[3]{x - \sqrt{1 + x^2}}$, 则有
+    \begin{align*}
+        a^3 + b^3 &= (x + \sqrt{1 + x^2}) + (x - \sqrt{1 + x^2}) = 2x, \\
+               ab &= \sqrt[3]{x^2 - (1 + x^2)} = -1.
+    \end{align*}
+    所以
+    \begin{align*}
+        y^3 
+        &= (a + b)^3 \\
+        &= (a^3 + b^3) + 3ab (a + b) \\
+        &= 2x - 3(a + b) \\
+        &= 2x - 3y.
+    \end{align*}
+    于是得到反函数
+    \[
+        y^{-1} = \frac{y^3 + 3y}{2},\quad y \in \mathbb{R}.
+    \]
+\end{solution}
+
+\subsection{数列的极限}
+
+\begin{exercise}[利用单调有界性]
+    已知数列 $\{u_n\}$ 满足 $u_1=1$, $u_{n+1}=\dfrac{1+2u_n}{1+u_n}$, 求 $\lim_{n \to \infty}u_n$.
+\end{exercise}
+
+\begin{solution}
+    % 由题得 $\displaystyle u_2 = \frac32 \in \intco[2]{\,\frac32, \frac{1 + \sqrt{5}}{2}\,}$. 
+    
+    对每一 $(k \ge 2)$, 若 $\displaystyle u_k \in \intco[2]{\,\frac32,\frac{1+\sqrt{5}}{2}\,}$, 则有
+    \[
+        u_{k + 1} 
+        = 2 - \frac{1}{1 + u_{k}}
+        \in \intco[2]{\,\frac 85,\frac{1 + \sqrt{5}}{2}}
+        \subseteq \intco[2]{\,\frac 32,\frac{1 + \sqrt{5}}{2}\,} ;
+    \]
+    又 $k = 2$ 时, $\displaystyle u_2 = \frac32 \in \intco[2]{\,\frac32, \frac{1 + \sqrt{5}}{2}\,}$ 成立. 由数学归纳法可得, $\displaystyle u_n \in \intco[2]{\,\frac32,\frac{1+\sqrt{5}}{2}\,}$ $(n \ge 2)$, 此时
+    \[
+        u_{n + 1} - u_n = \frac{1 - u_n - u_n^2}{1 + u_n} > 0.
+    \]
+    故 $\set{u_n}$ 单调有界, $\set{u_n}$ 的极限存在（且大于 $0$）. 
+    
+    设 $\lim_{n \to \infty}u_n = a$ $(a>0)$. 在数列递推式等号两侧取 $n \to \infty$ 时的极限, 得到关于 $a$ 的方程, 解得
+    \[
+        a = \lim_{n \to \infty} u_n = \frac{1 + \sqrt{5}}{2}.
+    \]
+\end{solution}
+
+\begin{exercise}[$\epsilon$-$\delta$ 定义法]
+    已知数列 $\set{a_n}$ 满足 $\displaystyle \lim_{n \to \infty}a_n=a$, 求证：$\displaystyle \lim_{n \to \infty} \frac 1n \sum_{i=1}^{n}a_i=a$.
+\end{exercise}
+
+\begin{proofs}
+    任取 $\varepsilon>0$, 则存在 $N=N(\varepsilon) \in \mathbb{Z}^+$, 当 $n>N$ 时, 
+    \[ \lvert a_n-a \rvert  < \varepsilon,\quad\text{即}\quad a-\varepsilon<a_n<a+\varepsilon. \]
+    又, 当 $n>N$ 时, 
+    \begin{equation}{\label{average of a_n}}
+    \lim_{n \to \infty} \frac 1n \sum_{i=1}^{n}a_n=\lim_{n \to \infty} \bigg(
+    \frac 1n \sum_{i=1}^{N}a_i + \frac 1n \sum_{i=N+1}^{n}a_i 
+    \bigg),
+    \end{equation}
+    因为
+    \begin{gather*}
+    \lim_{n \to \infty} \frac 1n \sum_{i=1}^{N}a_i = 0, \\
+    \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} (a-\varepsilon) < 
+    \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} a_i <
+    \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} (a+\varepsilon),
+    \end{gather*}
+    而
+    \[
+    \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} (a\pm\varepsilon) =
+    \lim_{n \to \infty} \frac{n-N}{n} (a\pm\varepsilon) =
+    a\pm\varepsilon
+    \]
+    所以, 对任意 $\varepsilon>0$, 
+    \[
+    a-\varepsilon < \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} a_i < a+\varepsilon,
+    \quad\text{即}\quad \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} a_i = a.
+    \]
+    所以 \eqref{average of a_n} 式可化为
+    \[
+    \lim_{n \to \infty} \frac 1n \sum_{i=1}^{n} a_i =
+    \lim_{n \to \infty} \frac 1n \sum_{i=1}^{N} a_i +
+    \lim_{n \to \infty} \frac 1n \sum_{i=N+1}^{n} a_i =
+    0 + a = a. \tag*{$\qed$}
+    \]
+\end{proofs}
+
+\begin{exercise}[$\epsilon$-$\delta$ 定义法]
+    已知数列 $\{u_n\}$, 满足 $\displaystyle \lim_{n \to \infty}\Big\lvert\frac{u_{n+1}}{u_n}\Big\rvert=\ell<1$. 求证：$\displaystyle \lim_{n \to \infty}u_n=0$.
+\end{exercise}
+
+\begin{exercise}[算术-几何平均数]
+    设 $0 \le a < b$, $x_1 = a$, $y_1 = b$, 且 $x_n = (x_{n - 1} + y_{n - 1}) / 2$, $y_n = \sqrt{x_{n-1} y_{n - 1}}$. 试证数列 $\set{x_n}$, $\set{y_n}$ 的极限存在且相等.
+\end{exercise}
+
+\begin{solution}
+    由题，$0 \le a < y_2 < x_2 < b$, 归纳可知 $a < y_n < x_n < b$, 于是 $y_n = \sqrt{x_{n - 1} y_{n - 1}} >  \sqrt{y_{n - 1} y_{n - 1}} = y_{n - 1}$. 所以 $\set{y_n}$ 递增且有界, 存在 $y = \lim_{n \to \infty} y_n$. 这样，$\lim_{n \to \infty} x_n = \lim_{n \to \infty} y_{n + 1}^2 / y_n = y$, 证毕.
+    
+    注意：这样生成的 $\set{x_n}$, $\set{y_n}$ 的共同极限，称为\href{https://en.wikipedia.org/wiki/Arithmetic-geometric_mean}{\emph{算数-几何平均数 (Arithmetic–geometric mean)}}, 可记作 $M(a, b)$. 对于一般的 $a$ 和 $b$, $M(a,b)$ 的值与第一类完全椭圆积分有关，故没有初等表示. 
+\end{solution}
+
+\begin{proof}
+    略
+\end{proof}
+
+\begin{exercise}[放缩法]
+    求极限 $\displaystyle \lim_{n \to \infty}\sum_{i=1}^{n}\frac{2^{i/n}}{n + 1/i}$.
+\end{exercise}
+
+\begin{solution}
+    因为
+    \begin{align*}
+              \lim_{n \to \infty} \sum_{i = 1}^{n} \frac{2^{i/n}}{n + 1/i}
+        &\leq \lim_{n \to \infty} \sum_{i = 1}^{n} \frac{2^{i/n}}{n} 
+         =    \lim_{n \to \infty} \frac{2^{1/n}}{n \del[1]{2^{1/n} - 1}}
+         =    \lim_{n \to \infty} \frac{1/n}{\del[1]{2^{1/n} - 1}}
+        \cdot \lim_{n \to \infty} 2^{1/n} 
+        =     \frac{1}{\ln 2},\\
+        %
+              \lim_{n \to \infty} \sum_{i = 1}^{n} \frac{2^{i/n}}{n + 1/i} 
+        &\geq \lim_{n \to \infty} \sum_{i = 1}^{n} \frac{2^{i/n}}{n + 1}
+         =    \lim_{n \to \infty} \sum_{i = 1}^{n} \frac{2^{i/n}}{n} 
+        \cdot \lim_{n \to \infty} \frac{n}{n + 1}
+         =    \frac{1}{\ln 2}.
+    \end{align*}
+    所以
+    \[
+        \lim_{n \to \infty} \sum_{i = 1}^{n} \frac{2^{i/n}}{n + 1/i} 
+        = \frac{1}{\ln 2}.
+    \]
+\end{solution}
+
+\begin{exercise}
+    已知数列 $\set{x_n}$ 满足 $x_1 \in \intoo{0,\pi}$, $x_n = \sin x_{n-1}$. 求证：当 $n \to \infty$ 时, $x_n \sim \sqrt{n}/3$.
+\end{exercise}
+
+\begin{exercise}[归结原理]
+    求极限
+    \[
+    \lim_{n \to \infty} n \sbr[3]{e^2 - \del[3]{1 + \frac 1n}^{2n}}.
+    \]
+\end{exercise}
+\begin{solution}
+    因为函数极限
+    \begin{align*}
+    % & \phantom{\mathop{=}}
+    \lim_{x \to \infty} x \sbr[3]{e^2 - \del[3]{1 + \frac 1x}^{2x}} 
+    & \xlongequal{t = 1/x} \lim_{t \to 0} \frac{e^2 - (1 + t)^{2/t}}{t} 
+    \quad \text{(分子为平方差形式)}\\
+    & = \lim_{t \to 0} \del[1]{e + (1 + t)^{1/t}} \frac{e - (1 + t)^{1/t}}{t} \\
+    & = 2e \lim_{t \to 0} \frac{e - (1 + t)^{1/t}}{t} \\
+    & \xlongequal{0/0} -2e \lim_{x \to 0} \frac{t - (1 + t) \ln(1 + t)}{t^2(1 + t)} (1 + t)^{1/t} \\
+    %& \xlongequal{0/0} -2e \lim_{x \to 0} (1 + t)^{1/t} \del[3]{-\frac{\ln(1 + t)}{t^2} + \frac{1}{t^2(t + 1)}}\\
+    & = -2e^2 \lim_{x \to 0} \frac{t - (1 + t) \ln(1 + t)}{t^2(1 + t)} \\
+    & \xlongequal{0/0} 2e^2 \lim_{x \to 0} \frac{\ln(1 + t)}{3t^2 + 2t} \\
+    & \xlongequal{0/0} e^2 \lim_{x \to 0} \frac{1}{(t + 1)(3t + 1)} \\
+    & = e^2,
+    \end{align*}
+    由归结原理, 有数列极限
+    \[
+    \lim_{n \to \infty} n \sbr[3]{e^2 - \del[3]{1 + \frac 1n}^{2n}}
+    = \lim_{x \to \infty} x \sbr[3]{e^2 - \del[3]{1 + \frac 1x}^{2x}}
+    = e^2.
+    \]
+\end{solution}
+
+\begin{exercise}[级数收敛的积分判别法]
+    计算极限
+    \[
+    \lim_{n \to \infty} \sum_{k = 1}^n \frac{k \sin(\frac kn)}{n^2 + n + k}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    因为
+    \[
+    \frac{k \sin(\frac kn)}{n^2 + n + k} 
+    = \frac{\frac 1n \cdot \frac kn \sin(\frac kn)}{1 + \frac 1n + \frac 1n \cdot \frac kn},
+    \]
+    根据夹逼定理, 我们有
+    \begin{align*}
+    \lim_{n \to \infty} \sum_{k = 1}^n \frac{\frac 1n \cdot \frac kn \sin(\frac kn)}{1 + \frac 1n + \frac 1n \cdot \frac kn}
+    % &\le \lim_{n \to \infty}  \frac{\frac 1n \sum_{k = 1}^n \frac kn \sin(\frac kn)}{1 + \frac 1n + \frac 1n \cdot \frac 1n} 
+    &\le \lim_{n \to \infty} \frac 1n \sum_{k = 1}^n \frac kn \sin(\frac kn), \\
+    \lim_{n \to \infty} \sum_{k = 1}^n \frac{\frac 1n \cdot \frac kn \sin(\frac kn)}{1 + \frac 1n + \frac 1n \cdot \frac kn}
+    &\ge \lim_{n \to \infty}  \frac{\frac 1n \sum_{k = 1}^n \frac kn \sin(\frac kn)}{1 + \frac 1n + \frac 1n} 
+    = \lim_{n \to \infty} \frac 1n \sum_{k = 1}^n \frac kn \sin(\frac kn).
+    \end{align*}
+    所以
+    \[
+    \lim_{n \to \infty} \sum_{k = 1}^n \frac{k \sin(\frac kn)}{n^2 + n + k}
+    =\lim_{n \to \infty} \frac 1n \sum_{k = 1}^n \frac kn \sin(\frac kn)
+    = \int_0^1 x \sin x \dx
+    = \sin 1 - \cos 1
+    \]
+    [在定积分中取分割 $x_i = i / n$ $(i = 0, 1, \ldots, n)$].
+\end{solution}
+
+\begin{exercise}[斯托尔兹–切萨罗定理]
+    \[
+        \lim_{n \to \infty} \frac{1}{n^2}\sum_{k = 1}^{n} \ln C_n^k.
+    \]
+\end{exercise}
+
+\begin{solution}
+    记 $a_n = \frac{1}{n^2}\sum_{k = 1}^{n} \ln C_n^k$, $b_n = n^2$. 因为 $\set{b_n}$ 严格递增且无上界，连续应用斯托尔兹–切萨罗 (Stolz–Cesàro) 定理两次，可得
+    \begin{align*}
+        \text{原式} 
+        &= \lim_{n \to \infty} \frac{a_n}{b_n} \\
+        &= \lim_{n \to \infty} \frac{a_{n + 1} - a_n}{b_{n + 1} - b_n} \\
+        &= \lim_{n \to \infty} \frac{n \ln(n + 1) - \ln(n!)}{2n - 1} \\
+        &= \lim_{n \to \infty} \frac{n[\ln(n + 2) - \ln(n + 1)]}{2} \\
+        &= 1 / 2,
+    \end{align*}
+    其中
+    \[
+        a_n = \ln \del[3]{\frac{(n!)^n}{\prod_{k = 1}^{n} (k!)^2}},
+        \qquad
+        a_{n + 1} - a_n = \ln \frac{(n + 1)^n}{(n + 1)!}.
+    \]
+    注：斯托尔兹–切萨罗定理可视为洛必达法则的离散形式，两者的证明与联系见\href{http://www.imomath.com/index.php?options=686}{这个链接}.
+\end{solution}
+
+\subsection{函数的极限}
+
+\begin{exercise}[换元, 分子有理化]
+    求极限
+    \[
+    \lim_{x \to +\infty} \del[2]{\sqrt{x + \sqrt{x + \sqrt{x}}} - \sqrt{x}}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    \begin{align*}
+    \text{原式} 
+    &= \lim_{t \to +\infty} (\sqrt{t^2 + \sqrt{t^2 + t}} - t) && \text{(令 $t = \sqrt{x} \to +\infty$)} \\
+    &= \lim_{t \to +\infty} \frac{\sqrt{t^2 + t}}{\sqrt{t^2 + \sqrt{t^2 + t}} + t}  && \text{(分子有理化)} \\[5pt]
+    &= \lim_{t \to +\infty} \frac{\sqrt{1 + 1/t}}{\sqrt{1 + \sqrt{\frac{1}{t^2} + \frac{1}{t^3}}} + 1} && \text{(上下同除 $t$)} \\
+    &= 1/2. 
+    \end{align*}
+\end{solution}
+
+\subsubsection{常用极限及其推导}
+\begin{enumerate}
+    \item $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$ \label{enum:limit_of_sin}
+    
+    \item $\displaystyle \lim_{x \to 0} \frac{1 - \cos x}{x^2 / 2} = \lim_{x \to 0} \frac{2\sin^2\frac x2}{2 (\frac x2)^2} = 1$
+    
+    \item $\displaystyle \lim_{x \to 0} \frac{\tan x}{x} = \lim_{x \to 0} \frac{\sin x}{x} \cdot \frac{1}{\cos x} = 1$
+    
+    \item $\displaystyle \lim_{x \to 0} (1 + x)^x = e$ \label{enum:def_of_e}
+    
+    \item $\displaystyle \lim_{x \to 0} \frac{\ln(x + 1)}{x} = \lim_{x \to 0} \ln \del[1]{(1 + x)^{1/x}} = \ln \del[1]{\lim_{x \to 0} (1 + x)^{1/x}} = \ln e = 1$
+    
+    %    \item $\displaystyle \lim_{x \to 0} \frac{\arcsin x}{x\tan x} = 1$
+    \item $\displaystyle \lim_{x \to 0} \frac{e^x - 1}{x} \xlongequal{t = e^x - 1} \lim_{t \to 0} \frac{t}{\ln(t + 1)} = 1$
+    
+    \item $\displaystyle \lim_{x \to 0} \frac{a^x - 1}{x \ln a} = \lim_{x \to 0} \frac{e^{x \ln a} - 1}{x \ln a} = 1$
+    
+    \item $\displaystyle \lim_{x \to 0} \frac{(1 + x)^a - 1}{ax} = \lim_{x \to 0} \frac{e^{a \ln(x + 1)} - 1}{a \ln(x + 1)} \cdot \frac{\ln(x + 1)}{x} = 1$    
+\end{enumerate}
+注：\begin{enumerate}
+    \item 极限 \eqref{enum:limit_of_sin} 由夹逼定理求得. 极限 \eqref{enum:def_of_e} 的存在由单调有界性保证, 这也是 $e$ 的定义式. 
+    
+    \item 由函数的连续性, 若以 $u = u(x)$ 代替 $x$, 上述每一极限在 $\lim_{x \to 0} u(x) = 0$ 时仍然成立.
+\end{enumerate}
+
+\begin{exercise}[利用常用极限]
+    计算极限
+    \[
+        \lim_{x \to \infty} x^2(e^{\frac 1x} + e^{\frac 1x} - 2)
+    \]
+\end{exercise}
+
+\begin{solution}
+    \[
+        \text{原式}
+        = \lim_{n \to \infty} e^{-1 / x} \del[3]{\frac{e^{1 / x} - 1}{1/x}}^2
+        = 1.
+    \]
+\end{solution}
+
+\begin{exercise}
+    计算极限
+    \[
+        \lim_{x \to 0} \frac{x \arcsin(3 \sin x)}{3^x + 2^x - 6^x -1}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    先通过分子分母同乘、分拆成多个式子相乘, 加上再减去同一项, 分拆成多个式子相加等方法, 将原式尽可能化为以基本极限表示的四则运算形式. 然后利用已知极限四则运算的性质, 逐步得到要求极限的值. 
+    \begin{align*}
+        \text{原式}
+        &= \lim_{x \to 0} \del[3]{\frac{\arcsin(3 \sin x)}{3 \sin x}
+            \cdot \frac{3 \sin x}{3x}
+            \cdot \frac{3x^2}{(3^x - 1) + (2^x - 1) - (6^x - 1)}} \\
+        &= 1 \cdot 1 \cdot 3\lim_{x \to 0} \del[2]{\frac{3^x - 1}{x^2} + \frac{2^x - 1}{x^2} - \frac{6^x - 1}{x^2}}^{-1} \\
+        &= 3 \cdot \tfrac 12 \del[1]{(\ln 3)^2 + (\ln 2)^2 - (\ln 6)^2}^{-1}\\
+        &= -\frac{3}{\ln 3 \cdot \ln 2},
+    \end{align*}
+    其中
+    \begin{enumerate}
+        \item $\lim_{x \to 0} \arcsin x / x$ 可由基本极限~\ref{enum:limit_of_sin} 推出,
+        \item $\lim_{x \to 0} (a^x - 1)/x\ (a > 0)$ 的计算, 依赖于极限 $\lim_{x \to 0} (e^x - 1)/x^2 = 1/2$:
+        \[
+            I = \lim_{x \to 0} \frac{e^x - 1}{x^2} = \lim_{x \to 0} \del[3]{ \frac 14\del[2]{\frac{e^{x/2} - 1}{x/2}}^2 + \frac 12 \frac{e^{x/2} - 1}{x/2}} = \frac 14 + \frac 12 I.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[多种方法的展示]
+    计算极限
+    \[
+        \lim_{x \to 0} \del[2]{\frac{1}{x^2} - \frac{1}{\tan^2 x}}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    \mbox{}
+    \begin{enumerate}[\bfseries 法 1：]
+        \item (洛必达法则)
+        \begin{align*}
+            \text{原式}
+            & = \lim_{x \to 0} \frac{\sin^2 x - x^2 \cos^2}{x^2 \sin^2 x} \\
+            & \stackrel{0/0}{=} \lim_{x \to 0} \frac{(1 + x^2)\sin 2x - x\cos 2x -x}{x^2 \sin 2x - x\cos x +x} \\
+            & \stackrel{0/0}{=} \lim_{x \to 0} \frac{4x\sin 2x + (1 + 2x^2)\sin 2x^2 - 1}{4x\cos 2x + (2x^2 - 1)\cos 2x + 1} \\
+            & \stackrel{0/0}{=} \lim_{x \to 0} \frac{(1 - 2x^2)\sin 2x + 6x\cos 2x}{(3 - 4x^2)\sin 2x + 6x\cos 2x} \\
+            & = 2/3.
+        \end{align*}
+        
+        \item (泰勒展开) 
+        \begin{align*}
+            \text{原式}
+            & = \lim_{x \to 0} \frac{\sin^2 x - x^2 \cos^2}{x^2 \sin^2 x} \\
+            & = \lim_{x \to 0} \frac{\sbr[1]{x - x^3 / 6 + o(x^4)}^2 - x^2\sbr[1]{1 - x^2 / 2 + o(x^4)}^2}{x^2 \sbr[1]{x + o(x^2)}^2} \\
+            & = \lim_{x \to 0} \frac{\sbr[1]{x^2 - x^4/3 + o(x^4)} - x^2 \sbr[1]{1 - x^4 + o(x^3)}}{x^4 + o(x^5)} \\
+            &= \tfrac 23 \lim_{x \to 0} \frac{x^4+ o(x^4)}{x^4 + o(x^5)} \\
+            & = 2/3.
+        \end{align*}
+            
+        \item (常用极限) 此处提供一种仅使用基本极限的解法, 虽显麻烦, 然体现了一些有用的技巧：
+        \begin{align*}
+            \text{原式} 
+            &= \lim_{x \to 0} \frac{\sin^2 x - x^2 \cos^2 x}{x^2 \sin^2 x} \\%& \text{通分, 并用 $\sin x / \cos x$ 代替 $\tan x$}\\
+            &= \lim_{x \to 0} \del[3]{\frac{x^2}{\sin^2 x} 
+                \cdot \frac{\sin x + x \cos x}{x} 
+                \cdot \frac{\sin x - x \cos x}{x^3}} \\%& \text{优先匹配分母 $\sin^2 x$, 初步拆分}\\
+            &= \lim_{x \to 0} \sbr[3]{\del[2]{\frac{x}{\sin x}}^2
+                \cdot \del[2]{\frac{\sin x}{x} + \cos x} 
+                \cdot \del[2]{\frac{\sin x - x}{x^3} + \frac{1 - \cos x}{x^2}}} \\
+            %& \text{拆分为基本极限的四则运算}\\
+            &= 1 \cdot (1 + 1) \cdot (-1/6 + 1/2) \\
+            &= 2/3.
+        \end{align*}
+        极限 $\lim_{x \to 0} (\sin x - 1)/x^3$ 的计算见习题~\ref{xiti:sinx-1}.
+    \end{enumerate}
+\end{solution}
+
+%\begin{exercise}
+%    求极限
+%    \[ \lim_{x \to 0} \del[2]{\frac{1}{x^2} - \cot^2 x}. \]
+%\end{exercise}
+%
+%\begin{solution}
+%    \mbox{}
+%    \begin{enumerate}[\bfseries 法 1：]
+%        \item (洛必达法则)
+%        \begin{align*}
+%        \text{原式}
+%        & = \lim_{x \to 0} \frac{\sin^2 x - x^2 \cos^2}{x^2 \sin^2 x} \\
+%        & \stackrel{0/0}{=} \lim_{x \to 0} \frac{(1 + x^2)\sin 2x - x\cos 2x -x}{x^2 \sin 2x - x\cos x +x} \\
+%        & \stackrel{0/0}{=} \lim_{x \to 0} \frac{4x\sin 2x + (1 + 2x^2)\sin 2x^2 - 1}{4x\cos 2x + (2x^2 - 1)\cos 2x + 1} \\
+%        & \stackrel{0/0}{=} \lim_{x \to 0} \frac{(1 - 2x^2)\sin 2x + 6x\cos 2x}{(3 - 4x^2)\sin 2x + 6x\cos 2x} \\
+%        & = 2/3.
+%        \end{align*}
+%        \item (泰勒展开) 
+%        \begin{align*}
+%        \text{原式}
+%        & = \lim_{x \to 0} \frac{\sin^2 x - x^2 \cos^2}{x^2 \sin^2 x} \\
+%        & = \lim_{x \to 0} \frac{\sbr[2]{x - x^3 / 6 + o(x^4)}^2 - x^2\sbr[2]{1 - x^2 / 2 + o(x^4)}^2}{x^2 \sbr[1]{x + o(x^2)}^2} \\
+%        & = \lim_{x \to 0} \frac{\sbr[2]{x^2 - x^4/3 + o(x^4)} - x^2 \sbr[1]{1 - x^4 + o(x^3)}}{x^4 + o(x^5)} \\
+%        & = 2/3.
+%        \end{align*}
+%    \end{enumerate}
+%\end{solution}
+
+\begin{exercise}[常用极限]
+    计算 $\displaystyle \lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$.
+\end{exercise}
+
+\begin{solution}
+    因为
+    \[
+        \frac{e^{2x} - 1 - 2x}{{2x}^2} = \frac 14 \del[2]{\frac{e^x - 1 }{x}}^2
+        + \frac 12 \frac{e^x - 1 - x}{x^2},
+    \]
+    等式两侧取 $x \to 0$ 时的极限, 并在左侧令 $t = 2x$, 有
+    \[
+        I
+        = \lim_{t \to 0} \frac{e^t - 1 - t}{t^2}
+        = \frac 14 \lim_{x \to 0} \del[2]{\frac{e^x - 1 }{x}}^2
+        + \frac 12 \lim_{x \to 0} \frac{e^x - 1 - x}{x^2}
+        = \frac 14 + \frac 12 I,
+    \]
+    所以 $I = \lim_{x \to 0} (e^x - 1 - x)/x^2 = 1/2$.
+    
+    据此, 可以计算以下极限:
+    \begin{align*}
+        \lim_{t \to \infty} \sbr[3]{\frac{(1 + 1/t)^t}{e}}^t
+        &\xlongequal{x = 1/t} \lim_{x \to 0} \sbr[3]{\frac{(1 + x)}{e^x}}^{1/x^2} \\
+        &= \lim_{x \to 0} \sbr[3]{1 - \frac{e^x - 1 - x}{e^x}}^{1/x^2} \\
+        &= \lim_{x \to 0} \exp\del[3]{-\frac{e^x - 1 - x}{x^2} \cdot \frac{1}{e^x}} \\
+        &= e^{-1/2}.
+    \end{align*}
+\end{solution}
+
+\begin{exercise}[常用极限] \label{xiti:sinx-1}
+    计算 $\displaystyle \lim_{x \to 0} \frac{x - \sin x}{x^3}$.
+\end{exercise}
+
+\begin{solution}
+    因为 $\sin 3x = 3 \sin x - 4 \sin^3 x$, 于是
+    \begin{align*}
+        I
+        &= \lim_{x \to 0} \frac{3x - \sin 3x}{(3x)^3} \\
+        &= \lim_{x \to 0} \frac{3x - 3 \sin x + 4 \sin^3 x}{(3x)^3} \\
+        &= \lim_{x \to 0} \sbr[3]{\frac 19 \frac{x - \sin x}{x^3}
+            + \frac{4}{27} \del[2]{\frac{\sin x}{x}}^3} \\
+        &= \frac 19 I + \frac{4}{27},
+    \end{align*}
+    所以 $\lim_{x \to 0} (x - \sin x) / x^3 = I = 1/6$.
+\end{solution}
+
+
+
+\begin{exercise}[$(1 + 1/x)^x$ 型]
+    计算极限
+    \[
+    \lim_{x \to 0} \del[3]{\frac 1n \sum_{i = 1}^{n}a_i^x}^{1/x}.
+    \]
+\end{exercise}
+\begin{solution}
+    记实数 $a_1$, $a_2$, $\cdots$, $a_n$ 的幂平均为 $M_p(n) = \del[1]{\frac 1n \sum_{i = 1}^{n}a_i^p}^{1/p}$ $(p \neq 0)$, 几何平均为 $G(n) = (\prod_{i = 0}^{n} a_i)^{1/n}$, 又记 $M_p'(n) = \del[1]{M_p(n)}^p - 1$. 由
+    \begin{align*}
+    \lim_{x \to 0} \frac{M_x'(n)}{x} 
+    = \lim_{x \to 0} \frac{\frac1n \sum_{i = 1}^{n}a_i^x - 1}{x}
+    = \frac 1n \sum_{i = 1}^{n} \lim_{x \to 0} \frac{a_i^x - 1}{x}
+    = \frac 1n \sum_{i = 1}^{n} \ln a_i,
+    \end{align*}
+    可得
+    \begin{align*}
+    \lim_{x \to 0} M_x(n)
+    &= \lim_{x \to 0} \sbr[2]{(M_x'(n) + 1)^{1/M_x'(n)}}^{M_x'(n)/x}
+    = \lim_{x \to 0} \exp(M_x'(n)/x) \\
+    &= \lim_{x \to 0} \exp\del[3]{\frac 1n \sum_{i = 1}^{n} \ln a_i}
+    = G(n).
+    \end{align*}
+    
+    实例：
+    \begin{itemize}
+        \item 若取 $n = 2$, $t = 1/x$, 即为 $\displaystyle \lim_{t \to \infty} \del[3]{\frac{\sqrt[t]{a} + \sqrt[t]{b}}{2}}^t = \sqrt{ab}$;
+        \item 单取 $n = 3$ 时, 为 $\displaystyle \lim_{x \to 0} \del[3]{\frac{a^x + b^x + c^x}{3}}^{1/x} = \sqrt[3]{abc}$.
+    \end{itemize} 
+\end{solution}
+
+
+\begin{exercise}[函数有界性]
+    计算 $\displaystyle \lim_{x\to0}x\arctan\frac 1x$.
+\end{exercise}
+
+\begin{solution}
+    因为 $\displaystyle \abs[2]{\arctan\frac 1x} \leq \frac \pi2$, $(x \to 0)$,  即 $\arctan\dfrac 1x$ 有界, 所以原式$=0$.
+\end{solution}
+
+\begin{exercise}[含参数]
+    求极限 $\displaystyle \lim_{x \to 0} \frac{(1+mx)^n - (1+nx)^m}{x^2} \quad (m, n \in \mathbb{Z})$.
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}[i)]
+        \item $n=m$, $\displaystyle \text{原式}=\lim_{x\to0}\frac{0}{x^2}=0.$
+        \item $n\neq m$, 不妨记 $n>m$：
+        \begin{align*}
+        \text{原式} 
+        &= \lim_{x\to0}\frac{1}{x^2}\Big( \sum_{i=1}^n C_n^i m^i x^i -\sum_{i=1}^m C_m^i n^i x^i \Big) \\
+        &= \lim_{x\to0}\frac{1}{x^2}\Big[ \sum_{i=1}^m (C_n^i-C_m^i)(m^i-n^i)x^i + \sum_{i=m+1}^n C_n^i m^i x^i \Big] \\
+        &= \begin{cases}
+        C_n^2                  & m = 1,  \\
+        (C_n^2-C_m^2)(m^2-n^2) & m\geq2.
+        \end{cases}
+        \end{align*}
+    \end{enumerate}
+    综上, 
+    \[\text{原式}=\begin{cases}
+        -C_m^2                 & m>n=1,                           \\
+        \phantom{-}C_n^2                  & n>m=1,                           \\
+        \phantom{-}0                      & n=m,                             \\
+        \phantom{-}(C_n^2-C_m^2)(m^2-n^2) & n\neq m\text{ 且 }\min(n,m)\geq2.
+    \end{cases}\]
+\end{solution}
+
+
+
+\begin{exercise}
+    求极限 $\displaystyle \lim_{x\to +\infty}\frac{\ln\del[1]{1+3^x}}{\ln\del[1]{1+2^x}}$.
+\end{exercise}
+
+\begin{solution}
+    \[
+    \lim_{x\to +\infty}\frac{\ln\del[1]{1+3^x}}{\ln\del[1]{1+2^x}} =
+    \lim_{x\to +\infty}\frac{\ln\sbr[2]{3^x \del[1]{3^{-x} + 1}}}{\ln\sbr[2]{2^x \del[1]{2^{-x} + 1}}} =
+    \lim_{x\to +\infty}\frac{\ln 3^x + \ln\del[1]{3^{-x} + 1}}{\ln 2^x + \ln\del[1]{2^{-x} + 1}} =
+    \frac{\ln 3}{\ln 2}.
+    \]
+\end{solution}
+
+
+\begin{exercise}
+    求极限
+    \[\lim_{x \to +\infty} \sbr[3]{\del[2]{x^3 - x^2 + \frac 1x} \mathe^{\frac 1x} - \sqrt{x^6 + 1}\,}\]
+\end{exercise}
+
+\begin{solution}
+    \mbox{}
+    \begin{enumerate}[\bfseries 法 1：]
+        \item （洛必达法则） 
+        \[
+            \text{原式 }
+            \stackrel{t = \frac 1x}{=} \lim_{t \to 0^+}\frac{\del[1]{1 - t + \frac{t^2}{2}\mathe^t} -\sqrt{1 + t^6}}{t^3}
+            \stackrel{\frac 00}{=} \lim_{t \to 0^+} \del[3]{\frac{\mathe^t}{6} - \frac{5t^3}{6}} 
+            = \frac 16.
+        \]
+        \item （泰勒公式）因为
+        \begin{align*}
+        \mathe^t & = 1 + t + \frac{t^2}{2} + \frac{t^3}{6} + o(t^3) \\
+        \sqrt{1 + t^6} & = 1 + \frac{t^6}{2} + o(t^6) = 1 + o(t^3),
+        \end{align*}
+        所以
+        
+        \[\displaystyle \text{原式 }
+        \stackrel{t = 1/x}{=} \lim_{t \to 0^+}\frac{\del[1]{1 - t + t^2 \mathe^t/2} -\sqrt{1 + t^6}}{t^3}
+        = \lim_{t \to 0^+} \frac{1}{t^3} \sbr[2]{0 + \tfrac 16 t^3 + o(t^3)} = \tfrac 16.
+        \]
+    \end{enumerate}
+\end{solution}
+
+
+
+\begin{exercise}
+    设 $f(x) = \sin ax / (x(x-1))$ $(\text{$a \in (0, 2\pi)$ 为常数})$, 试补充定义 $f(x)$ 在 $x = 0$ 与 $x = 1$ 处的值, 并确定 $a$ 的值, 使函数在闭区间 $[0, 1]$ 上连续.
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item $f(0^-) = f(0^+) = \lim_{x \to 0} a/(x-1) \cdot \sin(ax)/(ax) = -a$, 所以 $x = 0$ 是可去间断点.
+        \item 先证明 $a = \pi$. 若非, 则 $\lim_{x \to 1^-} \abs{f(x)} = \infty$, 即 $x = 1$ 处的左极限不存在, 这与 $f(x)$ 在 $[0,1]$ 上连续矛盾.
+        \item 此时, $\lim_{x \to 1^-} f(x) = -\pi \lim_{x \to 1^-} 1/x \cdot \sin\pi(x-1)/(\pi(x-1)) = -\pi$.
+        \item 综上, 取 $a = \pi$, 定义 $f(0) = f(1) = -\pi$, 可满足 $f(x)$ 在 $[0,1]$ 上连续的条件. 
+    \end{enumerate}
+    {\small 注：以上是思考的顺序. 严谨解答, 应该先写第四步, 然后证明在此条件下的 $f(x)$ 满足题设条件.}
+\end{solution}
+
+\begin{exercise}
+    求函数
+    \[
+    f(x) = \lim_{t \to +\infty} \frac{x + e^{tx}}{1 + e^{tx}}
+    \]
+    的间断点. 
+\end{exercise}
+
+\begin{solution}
+    \begin{enumerate}
+        \item 若 $x < 0$, 则 $\lim_{t \to +\infty} e^{tx} = 0$, 此时 $f(x) = \lim_{t \to +\infty} x/1 = x$.
+        \item 若 $x > 0$, 则 $\lim_{t \to +\infty} e^{-tx} = 0$, 此时 $f(x) = \lim_{t \to +\infty} (xe^{-tx} + 1)/(e^{-tx} + 1) = 1$.
+        \item 若 $x = 0$, 则 $e^{tx} \equiv e^0$, 此时 $f(0) = \lim_{t \to +\infty} (x + e^0)/(1 + e^0) = \frac 12$. 由前可得 $f(0^-) = 0$, $f(0^+) = 1$, $f(0^-) \neq f(0^+)$.
+        \item 综上, $f(x)$ 在 $(-\infty, 0) \cup (0, +\infty)$ 上连续, $x = 0$ 为其跳跃间断点. 
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+    设函数 $f(x)$ 对一切 $x_1$, $x_2$ 适合等式
+    \[
+    f(x_1 + x_2) = f(x_1)f(x_2),
+    \]
+    且 $f(x)$ 在 $x = 0$ 处连续, $f(0) \neq 0$. 试证明 $f(x)$ 在任意点 $x_0$ 处连续. 
+\end{exercise}
+
+\begin{solution}
+    取 $x_1 = x_2 = 0$, 则有 $f(0) = f^2(0)$,  $f(0)(f(0) - 1) = 0$. 又 $f(0) \neq 0$, 所以 $f(0) = 1$. 由题知, $f(x)$ 在 $x = 0$ 处连续, 即 $\lim_{x \to 0} f(x) = f(0) = 1$.
+    
+    对于任意 $x = x_0$, 试作函数在这一点的极限：
+    \begin{align*}
+    \lim_{x \to x_0} f(x) 
+    &= \lim_{\Delta x \to 0} f(x_0 + \Delta x) &\\
+    &= \lim_{\Delta x \to 0} f(x_0) f(\Delta x) &\\
+    &= f(x_0) \lim_{\Delta x \to 0} f(\Delta x) & \text{(注意到 $f(x_0)$ 与 $\Delta x$ 无关)} \\
+    &= f(x_0) & \text{(利用 $\lim_{x \to 0} f(x) = 1$)}
+    \end{align*}
+    所以 $f(x)$ 在任一点处极限存在且连续(注意到 $\lim_{x \to x_0} = f(x_0)$).
+\end{solution}
+
+\begin{exercise}
+    判断函数 $\displaystyle f(x) = \lim_{n \to +\infty} \frac{e^{nx} + 2}{e^{nx} + 1}$ 在 $x = 0$ 处的连续性. 
+\end{exercise}
+
+\begin{solution}
+    当 $x < 0$ 时, $0 < e^x < 1$,
+    \begin{align*}
+    f(x) 
+    = \lim_{n \to +\infty} \frac{e^{nx} + 2}{e^{nx} + 1}
+    = \lim_{n \to +\infty} \frac{(e^x)^n + 2}{(e^x)^n + 1}
+    = \lim_{n \to +\infty} \frac{0 + 2}{0 + 1}
+    = 2.
+    \end{align*}
+    当 $x > 0$ 时, $e^x > 1$,
+    \begin{align*}
+    f(x) 
+    = \lim_{n \to +\infty} \frac{e^{nx} + 2}{e^{nx} + 1}
+    = \lim_{n \to +\infty} \frac{1 + 2/(e^x)^n}{(1 + 1/(e^x)^n}
+    = \lim_{n \to +\infty} \frac{1}{1}
+    = 1.
+    \end{align*}
+    所以 $f(0-) = 2$, $f(0+) = 1$, $x = 0$ 是跳跃间断点. 
+\end{solution}
+
+
+
+\begin{exercise}
+    求极限
+    \[ \lim_{x \to +\infty} \del[2]{\frac 2\pi \arctan x}^x. \]
+\end{exercise}
+
+\begin{solution}
+    记 $u = \frac 2\pi \arctan x - 1$, 则有 $\lim_{x \to +\infty} u = 0$,
+    \[
+        \lim_{x \to +\infty} x \cdot u = \lim_{x \to +\infty} \frac{\frac 2\pi \arctan x - 1}{1 / x}
+        \xlongequal{\infty / \infty} \frac 2\pi\lim_{x \to +\infty} \frac{1/(1 + x^2)}{-1/x^2} 
+        = -\frac 2\pi.
+    \]
+    所以
+    \begin{align*}
+    \text{原式} & = \lim_{x \to +\infty} (1 + u)^x\\
+    & = \lim_{x \to +\infty} \sbr[2]{(1 + u)^{\frac 1u}}^{x \cdot u} \\
+    & = \lim_{x \to +\infty} \sbr[2]{(1 + u)^{\frac 1u}}^{\lim_{x \to +\infty} x \cdot u} \\
+    & = e^{-\pi / 2}.
+    \end{align*}
+\end{solution}
+
+
+
+\subsection{函数的连续性、可导性与微分中值定理}
+
+\begin{exercise}
+    已知函数
+    \[
+    f(x) = \begin{cases}
+    ax + b & 0 \le x \le 1, \\
+    e^{1/x} & \text{其他},
+    \end{cases}\]
+    其中 $a$ 和 $b$ 为常数. 试确定 $a$, $b$ 的值, 使 $f(x)$ 在其定义域连续.
+\end{exercise}
+\begin{solution}
+    易得, $f(x)$ 在 $\mathbb{R}\backslash \{0, 1\}$ 上连续. 假设 $f(x)$ 在 $x = 0, 1$ 处也连续, 以下我们将得到一个必要条件. 据连续性, $f(0^-) = f(0)$, $f(1^+) = f(1)$. 由 $f(0^-) = \lim_{x \to 0^-} e^{1/x} = 0$, $f(0) = (ax + b)\vert_{x = 0} = b$, 得到 $b = 0$. 再由 $f(1^+) = \lim_{x \to 1^+} e^{1/x} = e$, $f(1) = (ax + b)\vert_{x = 1} = a + b$, 得到 $a + b = e$. 据此可解得 $a = e$, $b = 0$.
+    
+    完整的解答仍需说明 $a = e$, $b = 0$ 是 $f(x)$ 在 $x = 0, 1$ 处连续的充分条件, 此处从略. 
+    
+    {\small 注：从解题角度, 只要求得满足条件的\emph{一个充分条件}即可, 对此题而言, 可以先提出 $a$, $b$ 的值, 再说明函数的连续性. 然而此类题大多有且仅有一组充要条件, 故而我们从必要条件入手的思路总是正确的. }
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)$ 在 $[a, b]$ 上三阶导数存在且连续，证明：存在 $\xi \in (a, b)$,
+    \[
+        f(b) = f(a) + (b - a) f'(\frac{a + b}{2}) + \frac{1}{24} f'''(\xi) (b - a)^3.
+    \]
+\end{exercise}
+
+\begin{solution}
+    将 $f(x)$ 在点 $c = (a + b) / 2$ 处展开为带拉格朗日余项的二阶泰勒公式, 得到
+    \begin{equation} \label{eq:cal:talor}
+        f(x) = f(c) + (x - c) f'(c) + \frac{(x - c)^2}{2!} f''(c) + \frac{(x - c)^3}{3!} f'''(\theta),
+    \end{equation}
+    $\theta$ 介于 $x$ 和 $c$ 之间. 分别取 $x = a, b$ 代入 \eqref{eq:cal:talor}，然后两式相减，注意到 $a - c = -(b - c) = (a - b) / 2$, 有
+%    \begin{align*}
+%        f(a) &= f(c) + (a - c) f'(c) + \frac{(a - c)^2}{2!} f''(c) + \frac{(a - c)^3}{3!} f'''(\eta), \\
+%        f(b) &= f(c) + (b - c) f'(c) + \frac{(b - c)^2}{2!} f''(c) + \frac{(b - c)^3}{3!} f'''(\zeta),
+%    \end{align*}
+    \[
+        f(a) - f(b) = (a - b) f'(c) + \frac{(a - b)^3}{48} (f'''(\eta) + f'''(\zeta)),
+    \]
+    其中 $a < \eta < c < \zeta < b$. 再由 $f'''$ 的连续性，可知存在 $\xi \in (\eta, \zeta)$ 使得
+    \[
+        2f'''(\xi) = f'''(\eta) + f'''(\zeta).
+    \]
+    于是，此 $\xi$ 满足要证明的命题，证毕.
+\end{solution}
+
+\begin{exercise}
+    设 $f(x)$ 在 $[0, 1]$ 上连续, 在 $(0, 1)$ 内可导, 且 $f(0) = 0$, $f(1) = 1$. 求证：存在 $\xi, \eta \in (0, 1)$, $\xi \ne \eta$ 满足 $f'(\xi) f'(\eta) = 1$.
+\end{exercise}
+
+\begin{proof}
+    记 $g(x) = f^2(x) - x^2$, 满足 $g(0) = g(1) = 0$. 由罗尔定理, 存在 $\xi \in (0, 1)$, 使得 $g'(\xi) = 2f(\xi) f'(\xi) - 2\xi = 0$. 于是 $f(\xi) f'(\xi) = \xi > 0$, $f(\xi) \ne 0$, 所以 $f'(\xi) = \xi / f'(\xi)$. 
+    
+    在区间 $[0, \xi]$ 内对 $f(x)$ 使用中值定理, 可知存在 $\eta \in (0, \xi)$, 使得 $f'(\eta) = f(\xi) / \xi$. 所以 $0 < \eta < \xi < 1$ 满足等式 $f'(\xi) f'(\eta) = 1$, 证毕.
+\end{proof}
+
+\begin{exercise}
+    设 $f(x)$ 在 $[0, 1]$ 上连续, 在 $(0, 1)$ 内可导, 且 $f(0) = 0$, $f(1) = 1$. 求证：
+    \begin{enumerate}
+        \item 存在 $\xi, \eta \in (0, 1)$, $\xi \ne \eta$ 满足
+        \begin{equation} \label{eq:cal:rolle}
+        \frac{a}{f'(\xi)} + \frac{b}{f'(\eta)} = a + b,
+        \end{equation}
+        其中 $a$, $b$ 是任意正实数.
+        
+        \item 对 $n$ $(n \ge 2)$ 个任意正实数 $\alpha_1, \alpha_2, \ldots, \alpha_n$, 在 $(0, 1)$ 中存在互不相同的数 $\beta_1, \beta_2, \ldots, \beta_n$, 满足
+        \[
+        \frac{\alpha_1}{f'(\beta_1)} + \frac{\alpha_2}{f'(\beta_2)} + \cdots + \frac{\alpha_n}{f'(\beta_n)} = \sum_{k = 1}^n \alpha_i.
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item 因为 $f$ 在 $[0, 1]$ 连续, 故存在 $c \in (0, 1)$ 满足 $f(c) = \frac{a}{a + b}$. 在区间 $[0, c]$ 和 $[c, 1]$ 内分别对 $f$ 使用中值定理, 可知存在 $\xi \in (0, c)$, $\eta \in (c, 1)$ 使得
+        \[
+        \frac{f(c) - f(0)}{c - 0} = f'(\xi)
+        \qquad\text{与}\qquad
+        \frac{f(1) - f(c)}{1 - c} = f'(\eta).
+        \]
+        这样的 $\xi$, $\eta$ 也满足 \eqref{eq:cal:rolle}, 原命题得证.
+        
+        \item 记 $S = \sum_{k = 1}^n \alpha_k$. 因为 $f$ 在 $[0, 1]$ 连续, 故存在 $c_1 \in (0, 1)$ 满足 $f(c_1) = \alpha_1 / S$. 当 $i$ 分别取 $2, 3, \ldots, n$ 时, 依次定义 $c_i \in (c_{i - 1}, 1)$ 使得 $f(c_i) = f(c_{i - 1}) + \alpha_i / S$. (这里的依次保证了之后的 $\beta_i$ 是互不相同的. )
+        
+        补记 $c_0 = 0$. 在每一区间 $[c_{i - 1}, c_i]$ 内对 $f$ 使用中值定理, 可知存在 $\beta_i \in (c_i, c_{i - 1})$ 使得
+        \[
+        \frac{f(c_i) - f(c_{i - 1})}{c_i - c_{i - 1}} = f'(\beta_i)
+        \qquad
+        i = 1, 2, \ldots, n.
+        \]
+        注意到 $\beta_i$ 严格递增, 我们有
+        \[
+        \sum_{i = 1}^{n} \frac{\alpha_i / S}{f'(\beta_i)}
+        = \sum_{i = 1}^{n} \frac{f(c_i) - f(c_{i - 1})}{f'(\beta_i)}
+        = \sum_{i = 1}^{n} (c_i - c_{i - 1})
+        = c_n - c_0
+        = 1,
+        \]
+        原命题得证. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\subsection{原函数与不定积分}
+\begin{exercise}
+    计算
+    \[
+    \displaystyle \int 3^x \cdot \mathe^x \dx.
+    \]
+\end{exercise}
+
+\begin{solution}
+    \mbox{}
+    \begin{enumerate}[\bfseries 法 1：]
+        \item 因为 $\displaystyle a^x = \mathe^{x\ln a}$, 所以 $\displaystyle \int 3^x \cdot \mathe^x \dx = \int \mathe^{x(1+\ln 3)} \dx = \frac{\mathe^{x(1 + \ln 3)}}{1 + \ln 3} = \frac{3^x \cdot \mathe^x}{1 + \ln 3}$.
+        \item 记 $\displaystyle \mathrm{I} 
+        = \int 3^x \cdot \mathe^x \dx = \int 3^x \dif \mathe^x 
+        %= 3^x \cdot e^x - \int e^x \dif 3^x 
+        %= 3^x \cdot e^x - \int \ln 3 \cdot 3^x \cdot e^x \dx 
+        = 3^x \cdot \mathe^x - \ln 3 \cdot \mathrm{I}\text{ （分部积分）}$, 所以 $\displaystyle \mathrm{I} = \frac{3^x \cdot \mathe^x}{1 + \ln 3}$.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}[换元，分部积分]
+    \[
+        \int \arctan \sqrt{x} \dx
+    \]
+\end{exercise}
+
+\begin{solution}
+    \begin{align*}
+        \text{原式} 
+        &\xlongequal{t = \sqrt{x}} \int 2t \arctan t \dt \\
+        &= \int \arctan t \dif t^2 \\
+        &= t^2 \arctan t - \int \frac{t^2}{1 + t^2} \dt \\
+        &= (1 + t^2) \arctan t - t \\
+        &= (1 + x) \arctan \sqrt{x} - \sqrt{x} + C.
+    \end{align*}
+\end{solution}
+
+\begin{exercise}
+    求不定积分 $\displaystyle \int \frac{\dx}{x(x^8 - 3)}$.
+\end{exercise}
+
+\begin{solution}
+    令 $t = x^8 - 3$, 则 $\dif t = 8x^7 \dx$. 所以
+    \begin{align*}
+        \text{原式} 
+        & = \int \frac{1}{xt} \cdot \frac{\dif t}{8x^7} 
+          = \int \frac{\dif t}{8t(t+3)}
+          = \frac{1}{24} \int \del[3]{\frac 1t - \frac{1}{t + 3}} \dif t \\
+        & = \frac{1}{24} \ln \envert[3]{\frac{t}{t + 3}} + C
+          = \tfrac{1}{24} \ln \envert[1]{1 - 3 \cdot x^{-8}} + C.
+    \end{align*}
+\end{solution}
+
+%\paragraph{讨论}不定积分
+%\[
+%    \int \mathe^{-x^2} \dx
+%\]
+%是无法用初等函数表示的, 然而它的一类定积分
+%\[
+%    \int_{-\infty}^{+\infty} \mathe^{-x^2} \dx
+%\]
+%却时常出现. 
+
+%美丽的事实是, 我们有
+
+\begin{exercise}
+    计算不定积分
+    \[
+    \int \sec^3\theta \dif\theta.
+    \]
+\end{exercise}
+\begin{solution}
+    因为 $(\tan\theta)' = \sec^2\theta$, $(\sec\theta)' = \tan\theta \sec\theta$, 所以
+    \begin{align*}
+        I &= \int \sec^3\theta \dif\theta \\
+        &= \int \sec\theta \dif\tan\theta \\ 
+        &= \sec\theta\tan\theta - \int \tan^2\theta \sec\theta \dif\theta \\
+        &= \sec\theta\tan\theta - \int (\sec^2\theta - 1) \sec\theta \dif\theta \\
+        &= \sec\theta\tan\theta + \int \sec\theta \dif\theta - I,
+    \end{align*}
+    即
+    \[
+        I = \frac12 \sec\theta\tan\theta + \frac12 \int \sec\theta \dif\theta.
+    \]
+    
+    一般地, 对 $n\in\mathbb{Z}_+$, $n\ge3$, 记 $I_n = \int \sec^n\theta \dif\theta$, 可得
+    \begin{align*}
+        I_n
+%        &= \int \sec^n\theta \dif\theta \\
+        &= \int \sec^{n-2}\theta \dif \tan\theta \\
+        &= \sec^{n-2}\theta \tan\theta - (n-2)\int \tan^2\theta \sec^{n-2}\theta \dif\theta \\
+        &= \sec^{n-2}\theta \tan\theta - (n-2)\int (\sec^2\theta - 1) \sec^{n-2}\theta \dif\theta \\
+        &= \sec^{n-2}\theta \tan\theta - (n-2) I_n + (n-2) I_{n - 2}.
+    \end{align*}
+    于是
+    \[
+        I_n = \frac{\sec^{n-2}\theta \tan\theta}{n-1}  + \frac{n-2}{n-1} I_{n-2}.
+    \]
+    即
+    \[
+        \int \sec^n\theta \dif\theta
+        = \frac{1}{n-1} \sec^{n-2}\theta \tan\theta 
+            + \frac{n-2}{n-1} \int \sec^{n-2}\theta \dif\theta,
+    \]
+\end{solution}
+
+\begin{exercise}
+    计算不定积分
+    \[
+        \int \frac{\dx}{\sin(x + a) \cos(x + b)}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    由 $a - b = (x + a) - (x + b)$ 和 $\cos(\alpha - \beta) = \cos\alpha \cos\beta + \sin\alpha \sin\beta$, 将被积函数乘以 $\sec(a - b) \cdot \cos(a - b) = 1$, 我们有
+    \begin{align*}
+        \text{原式} 
+%        &= \int \frac{\dx}{\sin(x + a) \cos(x + b)} \\
+        &= \sec(a - b) \int \frac{\cos\sbr[1]{(x + a) - (x + b)}}{\sin(x + a) \cos(x + b)} \dx \\
+        &= \sec(a - b) 
+        \int \sbr[3]{\frac{\cos(x + a)}{\sin(x + a)} + \frac{\sin(x + b)}{\cos(x + b)}} \dx \\
+        &= \sec(a - b) \sbr[2]{\ln\del[1]{\sin(x + a)} - \ln\del[1]{\cos(x + b)}} + C.
+    \end{align*}
+\end{solution}
+
+\begin{exercise}[构造变上限积分]
+    设 $f(x)$ 在区间 $[0, 1]$ 上有连续导数, 且 $0 \le f'(x) \le 1$, $f(0) = 0$. 求证:
+    \[
+    \sbr[3]{\int_0^1 f(x) \dx}^2 
+    \ge 
+    \int_0^1 [f(x)]^3 \dx.
+    \]
+\end{exercise}
+
+\begin{solution}
+    由
+    \[
+    f(x) = \int_0^x f'(t) \dt + f(0) = \int_0^x f'(t) \dt,
+    \]
+    可得 $f(x)$ 在 $[0, 1]$ 递增且 $0 \le f(x) \le \int_0^1 \dx \le 1$. 构造函数
+    \[
+    F(x) = \sbr[3]{\int_0^x f(t) \dt}^2 - \int_0^x [f(t)]^3 \dt 
+    \quad 
+    (0 \le x \le 1),
+    \]
+    于是有
+    \[
+    F'(x) = f(x) \sbr[3]{2 \int_0^x f(t) \dt - f^2(x)}.
+    \]
+    记 $F_1(x) = 2 \int_0^x f(t) \dt - f^2(x)$. 因为 $F_1(x)$ 在 $[0, 1]$ 递增且 $F_1(0) = 0$, 所以 $F(x)$ 在 $[0, 1]$ 也递增. 结合 $F(0) = 0$, 习题得证. 
+\end{solution}
+
+\begin{exercise}[构造变上限积分]
+    设 $f(x)$ 在区间 $[0, 1]$ 上恒正且单调递减减, 求证:
+    \[
+    \frac{\int_0^1 xf^2(x) \dx}{\int_0^1 xf(x) \dx}
+    \le
+    \frac{\int_0^1 f^2(x) \dx}{\int_0^1 f(x) \dx}.
+    \]
+\end{exercise}
+
+\begin{solution}
+    构造函数
+    \[
+    F(x) = \int_0^x f^2(t) \dt \cdot \int_0^x tf(t) \dt
+    - \int_0^x tf^2(t) \dt \cdot \int_0^x f(t) \dt. 
+    \quad 
+    (0 \le x \le 1).
+    \]
+    由
+    \[
+    F'(x) = f(x) \int_0^x f(t) (x - t) [f(t) - f(x)] \dt \ge 0 \quad (0 \le x \le 1)
+    \]
+    和 $F(0) = 0$ 可知, $F(1) \ge 0$, 习题得证.
+\end{solution}
+
+\subsection{定积分}
+\begin{exercise}
+    计算定积分
+    \[
+        \int_0^\pi \frac{x\sin x}{1+\cos^2 x} \dx.
+    \]
+\end{exercise}
+
+\begin{solution}
+    一般地, 有以下结论：
+    \[
+        \int_0^\pi x f(\sin x) \dx = \frac \pi2 \int_0^\pi f(\sin x) \dx.
+    \]
+    这是因为
+    \[
+        I = \int_0^\pi x f(\sin x) \dx
+        \xlongequal{u=\pi-x} -\int_\pi^0 (\pi-u)f(\sin u) \dif u
+        = \pi \int_0^\pi f(\sin u) \dif u - I,
+    \]
+    所以
+    \[
+        I = \frac \pi2 \int_0^\pi f(\sin x) \dx.
+    \]
+    
+    应用上面的结论, 我们有
+    \[
+        \int_0^\pi \frac{x\sin x}{1+\cos^2 x} \dx 
+        = \frac \pi2 \int_0^\pi \frac{\sin x}{1+\cos^2 x} 
+        = \frac \pi2 \eval[2]{\arctan(\cos x)}_0^\pi 
+        = \frac{\pi^2}{4}.
+    \]
+%    
+%    这样, 定积分
+%    \[
+%        \int_0^\pi \frac{x^2\sin x}{1+\cos^2 x} \dx
+%    \]
+%    也可用类似的方法求得了. 
+\end{solution}
+
+\subsection{级数}
+
+\begin{exercise}
+    证明级数
+    \[
+    \sum_{n = 1}^\infty \frac{(-1)^n}{n(2n - 1)}
+    \]
+    收敛, 并计算级数的和. 
+\end{exercise}
+
+\begin{solution}
+    易证级数绝对收敛, 故其收敛. 由
+    \[
+    \frac{1}{n(2n - 1)} = \frac{2}{2n - 1} - \frac{1}{n},
+    \]
+    （假设）我们知道
+    \begin{equation*}
+    \sum_{n = 1}^\infty \frac{(-1)^n}{2n - 1} = -\frac{\pi}{4}
+    \qquad\text{和}\qquad
+    \sum_{n = 1}^\infty \frac{(-1)^n}{n} = -\ln 2,
+    \end{equation*}
+    那么级数的和为
+    \[
+    \sum_{n = 1}^\infty \frac{(-1)^n}{n(2n - 1)} 
+    = \sum_{n = 1}^\infty \del[3]{2\frac{(-1)^n}{2n - 1} - \frac{(-1)^n}{n}}
+    = \ln 2 - \frac{\pi}{2}.
+    \]
+\end{solution}
+
+\begin{exercise}
+    求级数 $\sum_{n = 1}^\infty x^n$ 的和函数.
+\end{exercise}
+
+\begin{solution}
+    记 $S(x) = 1 / (1 - x) = \sum_{n = 0}^\infty x^n$ $( \lvert x \rvert < 1)$, 则
+    \begin{align*}
+    S'(x) &= \sum_{n = 1}^\infty n x^{n - 1}, \\
+    x S'(x) &= \sum_{n = 1}^\infty n x^n, \\
+    (x S'(x))' &= \sum_{n = 1}^\infty n^2 x^{n - 1}.
+    \end{align*}
+    所以
+    \[
+    \sum_{n = 1}^\infty n^2 x^{n - 1} 
+    = \frac{1 + x}{(1 - x)^3} \quad \lvert x \rvert < 1.
+    \]
+\end{solution}
+
+

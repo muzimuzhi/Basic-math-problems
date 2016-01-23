@@ -1,0 +1,122 @@
+\section{常微分方程}
+
+\begin{exercise}
+	求解微分方程组：
+	\begin{numcases}{}
+		\dod[2]xt = y, \label{eq:ode-group-1}\\[5pt]
+		\dod[2]yt = x. \label{eq:ode-group-2}
+	\end{numcases}
+\end{exercise}
+
+\begin{solution}
+	由 \eqref{eq:ode-group-1}, $\dod[4]xt = \dod[2]yt$, 代入 \eqref{eq:ode-group-2} 得
+	\begin{equation}\label{eq:ode-group-in-one}
+	\dod[4]xt - x = 0.
+	\end{equation}
+	在 \eqref{eq:ode-group-in-one} 中, 令 $D(\lambda) = \lambda^4 - 1 = 0$, 解得 $\lambda = \pm 1$, $\pm \mathrm{i}$. 所以 \eqref{eq:ode-group-in-one} 的通解为
+	\[
+	x = c_1 \mathe^t + c_2 \mathe^{-t} + c_3 \cos t + c_4 \sin t \qquad\text{($c_k$ 为常数, $k = 1,2,3,4$)}.
+	\]
+	将通解代入 \eqref{eq:ode-group-1}, 得
+	\[
+	y = c_1 \mathe^t + c_2 \mathe^{-t} - c_3 \cos t - c_4 \sin t.
+	\]
+	所以, 原方程组的解为
+	\[
+	\abcmatrix{x \\ y} = 
+	c_1 \abcmatrix{1 \\ 1}\mathe^t + c_2 \abcmatrix{1 \\ 1}\mathe^{-t} + 
+	c_3 \abcmatrix{1 \\ -1}\cos t + c_4 \abcmatrix{1 \\ -1}\sin t.
+	\]
+\end{solution}
+
+\begin{exercise}（常微分第一章习题55）
+	求解常微分方程 
+	\begin{equation}\label{eq:od1}
+	y'' + \sqrt{1 + (y')^2} = 0.
+	\end{equation}
+\end{exercise}
+
+\begin{solution}
+	原方程两边对 $x$ 求导, 并用 \eqref{eq:od1} 中的关系进行代换, 得到方程 $y'''-y' = 0$, 其通解为
+	\[
+	y = c_1^* \mathe^x + c_2^* \mathe^{-x} + c
+	\qquad\text{($c_1^*$, $c_2^*$, $c$ 为常数)}.
+	\]
+	将通解代入 \eqref{eq:od1}, 得 $c_1^* c_2^* = 1/4$ 且 $c_1^*<0 \text{ （ 注意到  $c_1^* \mathe^x + c_2^* \mathe^{-x} = y'' = -\sqrt{1 + (y')^2} \le 0$）}$. 所以
+	\[
+	y = \frac{c_1}{2} \mathe^{-x} + \frac{1}{2c_1} \mathe^x + c_2 \qquad (c_1,\,c_2 \text{ 为常数, 且 }c_1 < 0)
+	\]
+	是方程 \eqref{eq:od1} 的解. 
+	
+	\bigskip
+	
+	\textbf{另解：}令 $p(y) = y'$, 则 $y'' = pp'$. 代入 \eqref{eq:od1}, 得 $pp' + \sqrt{1+p^2} = 0$, 此为可分离变量方程, 整理、积分得
+	\begin{equation}\label{eq:od2}
+	y = \sqrt{1 + p^2} + c \qquad\text{($c$ 为常数)}.
+	\end{equation}
+	由 \eqref{eq:od1} 可得 $y'' = \sqrt{1 + p^2}$, 代入 \eqref{eq:od2} 得到 $y'' - y = -c$, 其通解为
+	\begin{equation}\label{eq:od3}
+	y = c_1^* \mathe^x + c_2^* \mathe^{-x} + c \qquad\text{($c_1^*$, $c_2^*$, $c$ 为常数)}.
+	\end{equation}
+	（后续与第一种解法类似）
+\end{solution}
+
+% \newpage
+\begin{exercise}（常微分第二章习题56）
+	已知常微分方程
+	\begin{equation}\label{eq:od2-1}
+	(1-x^2)y''' - xy'' + y' =0
+	\end{equation}
+	的一个解 $y_1 = x^2$, 求该方程的通解.
+\end{exercise}
+
+\begin{solution}
+	令 $z = y'$, 则 $z_1 = 2x$ 是方程
+	\begin{eqnarray}\label{eq:od2-2}
+	(1-x^2)z'' - xz' + z =0
+	\end{eqnarray}
+	的一个解. 设方程 \eqref{eq:od2-2} 的通解为 $z = u \cdot z_1$, 即 $z = 2x \cdot u(x)$.
+	
+	计算 $z'$, $z''$ 并代入 \eqref{eq:od2-2}, 得 $x(1 - x^2)u'' + (2 - 3x^2)u' = 0$, 此为可分离变量方程. 整理、积分, 得
+	\begin{eqnarray}
+	u' = \frac{c_1^*}{x^2 \sqrt{\,\abs{x^2 - 1}}} \qquad\text{($c_1^*$ 为常数)}.
+	\end{eqnarray}
+	
+	\begin{enumerate}[i)]
+		\item 若 $0 < \abs{x} < 1$, 则
+		\[u = \int \frac{c_1^*}{x^2 \sqrt{1 - x^2}} \dx= -\frac{c_1^*}{x} \sqrt{1-x^2} + c_2^* \qquad\text{($c_1^*,\,c_2^*$ 为常数)}. \]
+		故有 $z = 2x \cdot u = -2c_1^* \sqrt{1 - x^2} + 2c_2^* x$, 于是
+		\[
+		y = \int z \dx = -c_1^* \del[1]{\arcsin x + x\sqrt{1 - x^2}} + c_2^* x^2  + c_3^* \qquad\text{($c_1^*,\,c_2^*,\,c_3^*$ 为常数)}.
+		\]
+		
+%		所以, 当 $0 < \abs{x} < 1$ 时, 
+%		\[y = c_1 \del[1]{\arcsin x + x\sqrt{1 - x^2}} + c_2 x^2 + c_3 \qquad\text{($c_1$, $c_2$, $c_3$ 为常数)}\] 
+%		是方程 \eqref{eq:od2-1} 的通解.
+		
+		\item 若 $\abs{x}>1$, 则
+		\[
+            u 
+            = \int \frac{c_1}{x^2 \sqrt{x^2 - 1}} \dx
+            = \frac{c_1}{x} \sqrt{x^2 - 1} + c_2 
+            \qquad \text{($c_1,\,c_2$ 为常数)}.
+        \]
+		故有 $z = 2x \cdot u = 2c_1 \sqrt{x^2 - 1} + 2c_2 x,$, 于是
+		\[
+    		y 
+            = \int z \dx 
+            = c_1 \del[1]{\arcsin x + x \sqrt{x^2 - 1}} + c_2 x^2 + c_3 
+            \qquad \text{($c_1$, $c_2$, $c_3$ 为常数)}.
+		\]
+		
+		\item 
+        综上, 当 $x \in \mathbb{R}$ 时, 
+		\[
+            y = c_1 \del[1]{\arcsin x + x\sqrt{x^2 - 1}} + c_2 x^2 + c_3 
+            \qquad \text{($c_1$, $c_2$, $c_3$ 为常数)}
+        \]
+		是方程 \eqref{eq:od2-1} 的通解.
+	\end{enumerate}
+	
+	\emph{注：题中的积分有一定难度.}
+\end{solution}
