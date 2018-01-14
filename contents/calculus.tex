@@ -973,6 +973,37 @@
 %    也可用类似的方法求得了. 
 \end{solution}
 
+\subsection{定积分的应用}
+
+\begin{exercise}[平面曲线的弧长]
+    求极坐标曲线$\theta = \frac12(\rho + \frac1\rho)$在$1\le \rho\le 3$上一段的弧长。
+\end{exercise}
+
+\begin{solution}
+    一般地，若记
+    \[
+    \vect{r}(\rho) = \rho\cos\theta \vect{i} + \rho\sin\theta \vect{j}
+    \]
+    其中$\theta = \theta(\rho)$，则曲线$\vect{r}(\rho)$在$\rho_1\le\rho\le\rho_2$上的一段弧长可表示为
+    \[
+    s = \int_{\rho_1}^{\rho_2} \norm{\vect{r}'(\rho)} \dif\rho。
+    \]
+    
+    由$\vect{r}'(\rho) = [\cos\theta - \frac{\dif\theta}{\dif\rho}\sin\theta] \vect{i} + [\sin\theta + \frac{\dif\theta}{\dif\rho}\cos\theta] \vect{i}$，我们有
+    \[
+    s = \int_{\rho_1}^{\rho_2} \norm{\vect{r}'(\rho)} \dif\rho
+    = \int_{\rho_1}^{\rho_2} \sqrt{1 + \Bigl(\frac{\dif\theta}{\dif\rho}\Bigr)^2} \dif\rho。
+    \]
+    
+    本题中，$\theta(\rho) = \frac12(\rho + \frac1\rho)$，$\frac{\dif\theta}{\dif\rho} = \frac12(1 - r^{-2})$，所以
+    \begin{align*}
+    s &= \int_{\rho_1}^{\rho_2} \sqrt{1 + \Bigl(\frac{\dif\theta}{\dif\rho}\Bigr)^2} \dif\rho \\
+    &= \frac12 \int_1^3 \Bigl(\rho + \frac1\rho\Bigr) \dif\rho \\
+    &= \frac14 (2\rho^2 + \ln\rho)\bigr\vert_1^3 \\
+    &= 2 + \frac12 \ln3。
+    \end{align*}
+\end{solution}
+
 \subsection{级数}
 
 \begin{exercise}
