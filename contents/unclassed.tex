@@ -1,0 +1,244 @@
+\section{未归类}
+\begin{exercise}
+    证明：
+    \begin{align}
+    \int_0^1 x^{-x} \dx &= \sum_{n = 1}^{\infty} n^{-n} \label{eq:Sophomore's_dream}\\
+    \int_0^1 x^x \dx &= \sum_{n = 1}^{\infty} (-1)^{n+1} n^{-n}. \label{eq:Sophomore's_dream2}
+    \end{align}
+    \emph{注：以上两式均收敛. 此结论称为Sophomore's dream. 证明可参见%
+        \href{https://en.wikipedia.org/wiki/Sophomore\%27s_dream}{英文维基}和 %
+        \href{http://math.stackexchange.com/questions/237513/series-as-an-integral-sophomores-dream}{StackExchange Math 分版}.}
+\end{exercise}
+
+\begin{proof}
+    此处只证明式~\eqref{eq:Sophomore's_dream}, 式~\eqref{eq:Sophomore's_dream2} 的证明与之类似。
+    
+    首先, 将 $x^{-x}$ 展开, 得到
+    \begin{equation*}
+    x^{-x} = \exp(-x \ln x) = \sum_{n = 0}^{\infty} \frac{(-1)^n x^n (\ln x)^n}{n!}.
+    \end{equation*}
+    对上式两边做定积分, 有
+    \begin{equation*}
+    \int_0^1 x^{-x} \dx 
+    = \int_0^1 \sum_{n = 0}^{\infty} \frac{(-1)^n x^n (\ln x)^n}{n!} \dx,
+    \end{equation*}
+    右侧的级数一致收敛, 故求和与求积分可交换顺序, 于是有
+    \begin{equation*}
+    \int_0^1 x^{-x} \dx 
+    = \sum_{n = 0}^{\infty} \int_0^1 \frac{(-1)^n x^n (\ln n)^x}{n!} \dx.
+    \end{equation*}
+    计算上式右侧一般项 (当 $n = k$ 时) 的积分, 
+    \[
+    \int_0^1 \frac{(-1)^k x^k (\ln x)^k}{k!} \dx
+    = 
+    \]
+\end{proof}
+
+\begin{exercise}
+    考察 $f(x, y) = y^{-1} \sin y$ 在平面区域 $\{ (x, y) \mid 0 \le x \le \pi/2,\, x \le y \le \pi / 2 \}$ 上的二重积分
+    \[
+    I= \int_0^{\pi / 2} \int_x^{\pi / 2} \frac{\sin y}{y} \dif y \dx.
+    \]
+\end{exercise}
+
+\begin{solution}
+    注意到积分区域
+    \[
+    \set[1]{ (x, y) \mid 0 \le x \le \pi/2,\, x \le y \le \pi / 2 }
+    = \set[1]{ (x, y) \mid 0 \le y \le \pi/2,\, 0 \le x \le y },
+    \]
+    可交换 $I$ 中的积分次序, 得到
+    \[
+    I 
+    = \int_0^{\pi / 2} \int_x^{\pi / 2} \frac{\sin y}{y} \dif y \dx
+    = \int_0^{\pi / 2} \int_0^y \frac{\sin y}{y} \dx \dif y
+    = \int_0^{\pi / 2} \sin y \dif y
+    = 1.
+    \]
+\end{solution}
+
+\begin{exercise}
+    若有 
+    \[
+    \lim_{a,\,b\text{ s.t. }\mathcal{F}}\frac{2^a-2^b}{a-b} = \ln 2,
+    \]
+    求变量 $a$, $b$ 需满足的条件 $\mathcal{F}$.
+    
+    例如, 当 $a=1/n$, $b=1/(n+1)$, $n\to +\infty$ 时, 有
+    \[
+    \ln 2
+    = \lim_{n\to +\infty} n^2 [2^{1/n}-2^{1/(n+1)}]
+    = \lim_{n\to +\infty} n(n+1) [2^{1/n}-2^{1/(n+1)}]
+    = \lim_{n\to +\infty} \frac{2^{1/n}-2^{1/(n+1)}}{1/n - 1/(n+1)}.
+    \]
+\end{exercise}
+
+\[
+u_n = \frac{1}{n \cdot (\ln n)^p \cdot (\ln\ln n)^q}
+\]
+
+\[
+4\int_0^a y \dx = 4a^2\int_0^{\pi/2} \sin^4 t \cos^2 t \dif t = \frac 38 a^2 \int_0^{\pi/2}\del[1]{2-\cos 2t - 2\cos 4t + \cos 6t}\dif t = \frac{3\pi}{8} a^2
+\]
+
+\[
+\lim_{x \to 0} \frac{\ln \ln \ln \sbr[3]{x + (1 + x)^{\frac{(1 + x)^{1/x}}{x}}} + x \del[1]{1 - e^{-(e + 1)}}}{x^2}
+\]
+
+
+\begin{exercise}
+    求证：切比雪夫-拉盖尔 (Chebyshev-Laguerre) 多项式
+    \[
+        L_n(x) = e^x \frac{\dif^n}{\dif x^n} (x^n e^{-x})
+    \]
+    有 $n$ 个不同的零点.
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+    设 $f(x)$ 在 $[0, 1]$ 上连续，在 $(0, 1)$ 内二阶可导，且 $f(0) = 0$, $f(1) = 3$, $\min_{0 \le x \le 1} f(x) = -1$. 证明：存在 $\xi \in (0, 1)$，使
+    \[
+        f''(\xi) \ge 18.
+    \]
+\end{exercise}
+
+\begin{align*}
+    \int \frac{\sqrt{1 + x}}{\sqrt{x} (1 + \sqrt{x})} \dx
+    &\xlongequal{t = \sqrt{x}} 2\int \frac{\sqrt{1 + t^2}}{1 + t} \dt \\
+    &\xlongequal{t = \tan \theta} 2\int \frac{\sec^3 \theta}{1 + \tan \theta} \dif \theta \\
+     % [\theta \in (0, \pi/2)]
+    &\xlongequal{u = \tan(\theta/2)} 4\int \frac{(1 + u^2)^2}{(1 - u^2)^2 (1 - u^2 + 2u)} \dif u \\
+    &= \frac{2}{1 - u^2} + \log(1 - u) - 
+\end{align*}
+
+\begin{align*}
+    \int \frac{\sqrt{1 + x}}{\sqrt{x} (1 + \sqrt{x})} \dx
+    &\xlongequal{t = \sqrt{x}} 2\int \frac{\sqrt{1 + t^2}}{1 + t} \dt \\
+    &\xlongequal{t = \tan \theta} 2\int \frac{1}{\cos^2 \theta (\sin\theta + \cos\theta)} \dif \theta \\
+    &= \sqrt{2} \int \frac{1}{\cos^2 \theta \sin(\theta + \frac \pi4)} \dif \theta \\
+    &= \frac{\sqrt{2}}{\cos(\frac \pi4)} \int \frac{\cos[(\theta + \frac \pi4) - \theta]}{\cos^2 \theta \sin(\theta + \frac \pi4)} \dif \theta \\
+%    &= 2 \int \frac{\cos[(\theta + \frac \pi4) - \theta]}{\cos^2 \theta \sin(\theta + \frac \pi4)} \dif \theta \\
+    &= 2 \int \frac{1}{\cos\theta} 
+        \sbr[3]{\frac{\cos(\theta + \frac \pi4)}{\sin(\theta + \frac \pi4)}
+            + \frac{\sin\theta}{\cos\theta}}  \dif\theta \\
+    &= 2 \int \frac{\cos(\theta + \frac \pi4)}{\cos\theta \sin(\theta + \frac \pi4)} \dif\theta + I_1 \\
+    &= 2\sqrt{2} \int \cos(\theta + \tfrac \pi4) \frac{\cos[(\theta + \frac \pi4) - \theta]}{\cos\theta \sin(\theta + \frac \pi4)} \dif\theta 
+        + I_1\\
+    &= 2\sqrt{2} \int \cos(\theta + \tfrac \pi4) 
+        \sbr[3]{\frac{\cos(\theta + \frac \pi4)}{\sin(\theta + \frac \pi4)}
+                + \frac{\sin\theta}{\cos\theta}} \dif\theta 
+                + I_1\\
+    &= 2 \int (\cos\theta - \sin\theta) \frac{\sin\theta}{\cos\theta} \dif\theta 
+                    + I_1 + I_2\\
+    &= I_1 + I_2 + I_3,
+\end{align*}
+其中
+\begin{align*}
+    I_1 &= 2 \int \frac{\sin\theta}{\cos^2\theta} \dif\theta = \frac{2}{\cos\theta} + C_1\\
+    I_2 &= 2\sqrt{2} \int \frac{\cos^2(\theta + \frac \pi4)}{\sin(\theta + \frac \pi4)} \dif\theta \\
+    I_3 &= 2 \int (\cos\theta - \sin\theta) \frac{\sin\theta}{\cos\theta} \dif\theta
+\end{align*}
+
+%\newpage
+\begin{exercise}
+    设函数 $f(x)$ 在 $[a, b]$ 上有定义，且 $f'''(x)$ 在 $[a, b]$ 上存在. 证明：存在 $\xi \in (a, b)$, 使得
+    \[
+        f(b) - f(a) + \frac{a - b}{2} [f'(a) + f'(b)]
+        = -\frac{(b - a)^3}{12} f'''(\xi).
+    \]
+\end{exercise}
+
+\begin{proof}
+    记 $g(x) = f'(x)$, 那么我们只要证明存在 $\xi \in (a, b)$ 满足
+    \begin{align} \label{eq:cal:mvt-to-prove}
+        \int_a^b g(x) \dx = \frac{b - a}{2} [g(a) + g(b)] - \frac{(b - a)^3}{12} g''(\xi).
+    \end{align}
+    令 $p = \tfrac{a + b}{2}$, $m = \tfrac{a - b}{2}$, 连续运用两次分部积分，我们有
+    \begin{align}
+        \int_a^b g(x) \dx 
+        &= \int_a^b g(x) \dif (x - p) \notag \\ 
+        &= (x - p)g(x) \Big\vert_a^b - \int_a^b (x - p)g'(x) \dx \notag \\
+        &= (x - p)g(x) \Big\vert_a^b 
+            - \tfrac 12 \int_a^b g'(x) \dif [ (x - p)^2 - m^2] \notag \\
+        &= (x - p)g(x) \Big\vert_a^b 
+            - \tfrac 12 [(x - p)^2 - m^2] g'(x) \Big\vert_a^b 
+            + \tfrac 12 \int_a^b [(x - p)^2 - m^2] g''(x) \dx. \label{eq:cal:mvt}
+    \end{align}
+    因为
+    \begin{align*}
+        (x - p)g(x) \Big\vert_a^b &= \frac{b - a}{2} [g(a) + g(b)], \\
+        [(x - p)^2 - m^2] g'(x) \Big\vert_a^b &= 0,
+    \end{align*}
+    且 $x \in [a, b]$ 时 $(x - p)^2 - m^2 \le 0$, 存在 $\xi \in (a, b)$,
+    \[
+        \int_a^b [(x - p)^2 - m^2] g''(x) \dx
+        = g''(\xi) \int_a^b [(x - p)^2 - m^2] \dx
+        = -\tfrac{1}{6} (b - a)^3 g''(\xi),
+    \]
+    将这些代回到 \eqref{eq:cal:mvt}, 即可得 \eqref{eq:cal:mvt-to-prove}, 也就完成了证明.
+    
+    特别地，若任意函数 $h(x)$ 满足 $ h(0) = h(1) = 0$, 在 $(0, 1)$ 内二阶导连续，则存在 $\eta \in (0, 1)$,
+    \[
+        \int_0^1 h(x) \dx = -\tfrac{1}{12} h''(\eta).
+    \]
+    
+    一般地，我们可以取变换
+    \begin{align*}
+        p(x) &= g(a) + \frac{g(b) - g(a)}{b - a} (x - a), & p(a) &= p(b) = 0, \\
+        q(x) &= (b - a)x + a, & q(0) &= a, \quad q(1) = b, \\
+    \intertext{则有}
+        h(x) &= g[q(x)] - p[q(x)], & h(0) &= h(1) = 0.
+    \end{align*}
+    
+    注：此题与梯形积分法 trapezoid rule 的残差形式相关.
+\end{proof}
+
+%\newpage
+\begin{exercise}[$k$ 值法]
+    设 $f(x)$ 在 $[a, b]$ 上 $2$ 阶可导，且 $f(a) = f(b) = 0$. 求证：对 $\forall t \in (a, b)$, $\exists \xi \in (a, b)$, 使得
+    \[
+        2f(t) = f''(\xi) (t - a) (t - b).
+    \]
+\end{exercise}
+
+\begin{proof}
+    对 $\forall t \in (a, b)$, 记
+    \[
+        k = \frac{2f(t)}{(t - a)(t - b)} \quad\text{($k$ 为常数)}.
+    \]
+    令 $F(x) = f(x) - \frac 12 k(x - a)(x - b)$, 则有 $F(a) = f(a) = 0$, $F(b) = f(b) = 0$, 
+    \[
+        F(t) = f(t) - \frac 12 \cdot \frac{2f(t)}{(t - a)(t - b)} \cdot (t - a)(t - b)
+        = 0.
+    \]
+    所以
+    \[
+        \exists c_1 \in (a, t) \quad F'(c_1) = 0,
+        \qquad
+        \exists c_2 \in (t, b) \quad F'(c_2) = 0,
+    \]
+    于是 $\exists \xi \in (c_1, c_2)$, $F''(\xi) = f''(\xi) - k = 0$, 原命题得证.
+\end{proof}
+
+\begin{exercise}
+    设常数 $\alpha > 0$, 积分
+    \[
+        I_1 = \int_0^{\pi / 2} \frac{\cos x}{1 + x^\alpha} \dx,
+        \qquad
+        I_2 = \int_0^{\pi / 2} \frac{\sin x}{1 + x^\alpha} \dx.
+    \]
+    试比较 $I_1$ 与 $I_2$ 的大小.
+\end{exercise}
+
+\begin{align*}
+    \frac{1}{\sqrt{2}}(I_2 - I_1)
+    &= \int_0^{\pi / 2} \frac{\sin(x - \pi/4)}{1 + x^\alpha} \dx \\
+    &\xlongequal{t = x - \pi/4} \int_{-\pi/4}^{\pi/4} \frac{\sin t}{1 + (x + \pi/4)^\alpha} \dt \\
+    &= \int_{-\pi/4}^{0} \frac{\sin t}{1 + (t + \pi/4)^\alpha} \dt
+        + \int_{0}^{\pi/4} \frac{\sin t}{1 + (t + \pi/4)^\alpha} \dt \\
+    &= \int_{0}^{\pi/4} \sin t \sbr[3]{\frac{1}{1 + (\pi/4 + t)^\alpha}
+        - \frac{1}{1 + (\pi/4 - t)^\alpha}} \dt \\
+\end{align*}
