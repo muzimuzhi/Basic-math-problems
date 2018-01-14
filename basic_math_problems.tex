@@ -1,0 +1,73 @@
+%!TeX program = xelatex
+%!TeX encoding = utf-8
+
+\documentclass[fontset=none]{ctexart}
+
+\title{基础数学习题初汇\thanks{这是自己学习\LaTeX 之际, 回答基础数学课程问题时积累下的文档, 既不全面亦非权威, 仅作参考. 错漏或有，你提我改. \texttt{tex}原文件尚有诸多不足之处, 他日整理后再上传. %随内容增加会不时上传更新. 
+        }}
+\author{muzimuzhi}
+\date{2015年10月--2017年11月}
+    
+\xeCJKsetup{CJKmath=true}
+    
+\defaultCJKfontfeatures{Mapping=fullwidth-stop}
+
+\ctexset{fontset=mac}
+
+\usepackage{amsmath, amsthm}
+\usepackage{unicode-math}
+\usepackage{array}
+% \usepackage{bm}
+\usepackage{cases}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{extarrows}
+\usepackage[a4paper]{geometry}
+\usepackage{xcolor}
+%\usepackage{CTeX}
+
+\usepackage{commath}
+\renewcommand\dif{\mathop{}\!\mathrm{d}}
+\newcommand{\dx}{\ensuremath{\dif x}}
+\newcommand{\dt}{\ensuremath{\dif t}}
+\newcommand{\mathe}{\ensuremath{\mathrm{e}}}
+\newcommand{\abcmatrix}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+
+\theoremstyle{plain}
+\newtheorem{exercise}{习题}[subsection]
+
+
+\theoremstyle{definition}
+\newtheorem*{solution}{解}
+\newtheorem*{proofs}{证明}
+
+\newcommand{\vect}[1]{\symbfit{#1}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\renewcommand{\norm}[1]{\lVert#1\rVert}
+
+
+\allowdisplaybreaks[2]
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\input{contents/calculus}
+\input{contents/vector_algebra}
+\input{contents/prob_and_stat}
+\input{contents/ordinary_differential_equation}
+\input{contents/partial_differential_equation}
+\input{contents/unclassed}
+
+\end{document}
+
+
+
